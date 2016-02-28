@@ -9,6 +9,12 @@ export default class Root extends React.Component {
     store: PropTypes.object.isRequired
   };
 
+  componentWillMount () {
+    if (localStorage.getItem('userTokenExp') < Date.now()/1000 + 1000) {
+      localStorage.removeItem('userToken')
+    }
+  }
+
   get content () {
     return (
       <Router history={this.props.history}>

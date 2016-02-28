@@ -1,0 +1,106 @@
+.root {
+  background-color: white;
+}
+
+.fakeunder {
+  background-color: white;
+  height: 55px;
+}
+
+.container {
+  max-width: 930px;
+  margin: 0 auto;
+  padding-top: 30px;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 85vh;
+}
+
+.container2 {
+  max-width: 930px;
+  margin: 0 auto;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: 300;
+  padding: 10px;
+  width: 100%;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  text-align: left;
+}
+
+.select {
+  max-width: 300px;
+  align-self: center;
+  margin: 10px;
+  margin-bottom: 20px;
+}
+
+.where {
+  text-align: center;
+  font-size: 1.25em;
+  font-weight: 300;
+  padding-top: 50px;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding-bottom: 10px;
+}
+
+.error {
+  font-weight: 600;
+  color: red;
+  margin-right: 10px;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.agree {
+  padding-top: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.button {
+    margin-top: 20px;
+    background-color: #ff4351;
+    color: white;
+    border-radius: 2px;
+    padding: 10px;
+    cursor: pointer;
+    margin-bottom: 200px;
+}
+
+.accept {
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.aref {
+  color: blue;
+  text-decoration: underline;
+}
+
+.good {
+  font-weight: 600;
+  margin-right: 10px;
+  margin-left: 10px;
+}

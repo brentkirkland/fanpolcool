@@ -1,14 +1,309 @@
 .counter {
   font-weight: bold;
+  color: #414042;
 }
 
 .counter--green {
-  composes: counter;
   color: rgb(25,200,25);
 }
 
-.duck {
-  display: block;
+.container {
+  margin: 0 auto;
+  width: 950px;
+  color: black;
+}
+
+.a {
+  text-decoration: underline;
+}
+
+.fakeunder {
+  background-color: #112633;
+  height: 55px;
+}
+
+.root {
+
+}
+
+.welcome {
+  background-color: #112633;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.floatingdiv {
+  position: absolute;
+  align-self: center;
+  top: 250px;
+  left: 0;
   width: 100%;
-  margin-top: 1.5rem;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  z-index: 13;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-direction: column;
+
+}
+
+.floatingbuttondiv {
+
+  padding-top: 20px;
+  position: absolute;
+  align-self: center;
+  width: 100%;
+  text-align: center;
+  z-index: 14;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+a { text-decoration: none; }
+
+.buttondiv {
+  padding: 10px;
+  background-color: #ff4351;
+  border-radius: 2px;
+    cursor: pointer;
+}
+
+.buttondiv:hover {
+  background-color: #fc2b45;
+}
+
+.buttontext {
+  text-transform: uppercase;
+  color: white;
+  font-weight: 600;
+  font-size: 1.25em;
+  text-decoration: none;
+}
+
+.buttontext:visited {
+  text-decoration: none;
+  color: white;
+}
+
+.buttontext:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.buttontext:active {
+  text-decoration: none;
+}
+
+.welcometoptext {
+  font-size: 3em;
+  font-weight: bold;
+  color: white;
+}
+
+.welcomebottomtext {
+  font-size: 3em;
+  font-style: italic;
+  font-weight: bold;
+  color: white;
+}
+
+
+.top {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+    flex: 2;
+    padding-top: 160px;
+    padding-bottom: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.top2 {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  flex: 1;
+  padding-top: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.top3 {
+  flex: 1;
+  padding-top: 50px;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.top4 {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  flex: 1;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 40px;
+}
+
+
+.title {
+  font-size: 3em;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.title2 {
+  font-size: 1.75em;
+  font-weight: 600;
+}
+
+.slogan {
+  font-size: 1.5em;
+  font-weight: 200;
+}
+
+.slogan2 {
+  font-size: 1.5em;
+  font-weight: 200;
+}
+
+.footNote {
+  font-size: .75em;
+}
+
+@media screen and (max-width: 930px) {
+  .container {
+    margin: 0 auto;
+    color: #112633;
+    width: 100%;
+  }
+  .welcome {
+    background-color: #112633;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: static;
+  }
+  .floatingdiv {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    position: static;
+    align-self: center;
+    width: 100%;
+    text-align: center;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .floatingbuttondiv {
+    position: static;
+    padding-top: 20px;
+    align-self: center;
+    width: 100%;
+    text-align: center;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .buttondiv {
+    padding: 10px;
+    background-color: #ff4351;
+    border-radius: 2px;
+      cursor: pointer;
+  }
+
+  .buttondiv:hover {
+    background-color: #fc2b45;
+  }
+
+  .buttontext {
+    text-transform: uppercase;
+    color: white;
+    font-weight: 600;
+    font-size: 1em;
+  }
+
+  .welcometoptext {
+    font-size: 1.75em;
+    font-weight: bold;
+    color: white;
+  }
+
+  .welcomebottomtext {
+    font-size: 1.75em;
+    font-style: italic;
+    font-weight: bold;
+    color: white;
+  }
+
+  .title2 {
+    font-size: 1.5em;
+    font-weight: 600;
+  }
+
+  .slogan {
+    font-size: 1.25em;
+    font-weight: 200;
+  }
+
+  .slogan2 {
+    font-size: 1.25em;
+    font-weight: 200;
+  }
 }

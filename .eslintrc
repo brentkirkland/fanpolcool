@@ -21,7 +21,8 @@
   "rules": {
     "semi" : [2, "never"],
     "space-infix-ops": 0,
-    "max-len": [2, 120, 2],
+    "no-extra-bind": 0,
+    "react/jsx-no-bind": [1, {"allowBind": true}],
     "flow-vars/define-flow-type": 1,
     "flow-vars/use-flow-type": 1
   }

@@ -1,0 +1,119 @@
+/* React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
+
+.root {
+  padding-right: 10px;
+  color: black;
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-webkit-flexbox;
+  display:-moz-flex;
+  display:-moz-box;
+  display:-ms-flexbox;
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.root2 {
+  padding-right: 10px;
+  color: black;
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-webkit-flexbox;
+  display:-moz-flex;
+  display:-moz-box;
+  display:-ms-flexbox;
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.coverpage {
+  position: absolute;
+  z-index: 48;
+  background-color: #112633;
+  top: 55px;
+  left: 0px;
+  width: 100%;
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-webkit-flexbox;
+  display:-moz-flex;
+  display:-moz-box;
+  display:-ms-flexbox;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.linksmall {
+  border-top-color: rgba(255, 255, 255, 0.15);
+  border-top-style: solid;
+  border-top-width: 1px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  font-weight: 600;
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100%;
+  text-align: left;
+}
+
+.linksmall:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.r {
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-webkit-flexbox;
+  display:-moz-flex;
+  display:-moz-box;
+  display:-ms-flexbox;
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.highlight {
+  margin-right: 8px;
+  margin-left: 8px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, .05);
+  color: #fff;
+}
+
+.highlight:hover {
+  background: rgba(0, 0, 0, .1);
+}
+
+.spacer {
+  color: rgba(50, 50, 50, .3);
+}
+
+.link {
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: .75em;
+  font-weight: 600;
+  text-decoration: none;
+  color: white;
+  padding-left: 20px;
+}
+
+.link:visited {
+  text-decoration: none;
+  color: white;
+}
+
+.link:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+.yep {
+
+}

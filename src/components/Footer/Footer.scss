@@ -1,0 +1,64 @@
+.root {
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 950px;
+  padding: 10px 0;
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-webkit-flexbox;
+  display:-moz-flex;
+  display:-moz-box;
+  display:-ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media screen and (max-width: 930px) {
+  .container {
+    margin: 0 auto;
+    max-width: 950px;
+    padding: 20px 0;
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:-webkit-flexbox;
+    display:-moz-flex;
+    display:-moz-box;
+    display:-ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+}
+
+.element1, .element2 {
+  padding-right: 20px;
+  font-size: .75em;
+  text-transform: uppercase;
+  color: black;
+}
+
+.element1 {
+  cursor: pointer;
+  font-weight: 600;
+}
+.element2 {
+  padding-top: 2px;
+}
+
+.element1:hover {
+  text-decoration: underline;
+}
+
+.element1:visited {
+  color: black;
+}

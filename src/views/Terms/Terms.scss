@@ -1,0 +1,46 @@
+.root {
+
+}
+
+.container {
+  max-width: 930px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0 auto;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: 300;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.effective {
+  padding-bottom: 20px;
+}
+
+.welcome {
+  padding-bottom: 20px;
+}
+
+.number {
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+
+.letter {
+  margin-left: 37px;
+  padding-bottom: 20px;
+}
+
+.subletter {
+  margin-left: 81px;
+  padding-bottom: 20px;
+}

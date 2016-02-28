@@ -1,0 +1,96 @@
+.root {
+  background: #112633;
+  position: fixed;
+  width: 100%;
+  z-index: 26;
+  background-color: red;
+}
+.root2 {
+  background: #112633;
+  width: 100%;
+}
+
+.root3 {
+  background: #fff;
+  width: 100%;
+}
+
+
+.container {
+  margin: 0 auto;
+  max-width: 930px;
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-webkit-flexbox;
+  display:-moz-flex;
+  display:-moz-box;
+  display:-ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 55px;
+}
+
+.brand {
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-webkit-flexbox;
+  display:-moz-flex;
+  display:-moz-box;
+  display:-ms-flexbox;
+  display: flex;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 1.5em; /* ~28px */
+  letter-spacing: 0.5px;
+  padding-left: 10px;
+}
+
+.brandTxt {
+  margin-left: 0px;
+}
+
+.brandTxt2 {
+  color: white;
+}
+
+
+.nav {
+  float: right;
+  margin-top: 6px;
+}
+
+.banner {
+  text-align: center;
+}
+
+.bannerTitle {
+  margin: 0;
+  padding: 10px;
+  font-weight: normal;
+  font-size: 4em;
+  line-height: 1em;
+}
+
+.bannerDesc {
+  padding: 0;
+  color: rgba(255, 255, 255, .5);
+  font-size: 1.25em;
+  margin: 0;
+}
+
+@media screen and (max-width: 930px) {
+  .brand {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 1.5em; /* ~28px */
+    padding-left: 10px;
+    flex: 1;
+  }
+}
