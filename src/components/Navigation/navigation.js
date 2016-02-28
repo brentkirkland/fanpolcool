@@ -141,7 +141,7 @@ export class Navigation extends Component {
           <span className={s.linksmall} onClick={this.logOut}>Logout</span>
         </div>
       }
-      return(
+      return (
         <div className={s.coverpage}>
           <Link className={s.linksmall} to='/games'>Games</Link>
           <span className={s.linksmall}>Loading profile</span>

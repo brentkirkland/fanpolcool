@@ -13,11 +13,11 @@ import { bindActionCreators } from 'redux'
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 const mapStateToProps = (state) => ({
   router: state.router,
-  profile: state.profile,
+  profile: state.profile
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  profileActions: bindActionCreators(profileActions, dispatch),
+  profileActions: bindActionCreators(profileActions, dispatch)
 })
 export class AcceptView extends React.Component {
 
@@ -50,6 +50,7 @@ export class AcceptView extends React.Component {
 
   static propTypes = {
     profile: React.PropTypes.object.isRequired,
+    profileActions: React.PropTypes.object.isRequired,
     route: React.PropTypes.object.isRequired,
     router: React.PropTypes.object.isRequired
   };
@@ -62,9 +63,9 @@ export class AcceptView extends React.Component {
 
   handleClick () {
     this.props.profileActions.agree(this.state.state)
-    if (this.props.router.locationBeforeTransitions.hash !== "") {
+    if (this.props.router.locationBeforeTransitions.hash !== '') {
       var address = this.props.router.locationBeforeTransitions.hash.split('state=')[1]
-      if (this.props.profile.idToken !== null && this.props.profile.idToken !== "") {
+      if (this.props.profile.idToken !== null && this.props.profile.idToken !== '') {
         // console.log('address', address)
         this.context.router.push('/points#state=' + address)
       }

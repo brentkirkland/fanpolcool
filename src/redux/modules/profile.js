@@ -142,12 +142,34 @@ export const agree = (state) => {
   }
 }
 
+export const payout = (address, amount, check, email, name) => {
+  return (dispatch, getState) => {
+    fetch('https://api.fantasypollster.com/api/users/payout', {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        address: address,
+        amount: amount,
+        check: check,
+        email: email,
+        name: name
+      })
+    })
+    // getFoos.then((response) => handleStatus(response)).then((json) => dispatch(payout()))
+  }
+}
+
 export const actions = {
   createLock,
   getProfile,
   logout,
   getBalance,
-  agree
+  agree,
+  payout
 }
 
 // ------------------------------------

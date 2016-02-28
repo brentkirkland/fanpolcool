@@ -13,11 +13,11 @@ import { bindActionCreators } from 'redux'
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 const mapStateToProps = (state) => ({
   router: state.router,
-  profile: state.profile,
+  profile: state.profile
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  profileActions: bindActionCreators(profileActions, dispatch),
+  profileActions: bindActionCreators(profileActions, dispatch)
 })
 export class PayInOutView extends React.Component {
 
@@ -39,9 +39,12 @@ export class PayInOutView extends React.Component {
       city: '',
       zip: '',
       state: '',
-      method: ''
+      method: '',
+      amount: 0,
+      name: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleAmount = this.handleAmount.bind(this)
     this.handleCheckBox = this.handleCheckBox.bind(this)
     this.handleEmail = this.handleEmail.bind(this)
     this.handleAddressLine1 = this.handleAddressLine1.bind(this)
@@ -49,12 +52,14 @@ export class PayInOutView extends React.Component {
     this.handleCity = this.handleCity.bind(this)
     this.handleZip = this.handleZip.bind(this)
     this.handleState = this.handleState.bind(this)
+    this.handleName = this.handleName.bind(this)
   }
 
   static propTypes = {
     route: React.PropTypes.object.isRequired,
     router: React.PropTypes.object.isRequired,
-    profile: React.PropTypes.object.isRequired
+    profile: React.PropTypes.object.isRequired,
+    profileActions: React.PropTypes.object.isRequired
   };
 
   static contextTypes = {
@@ -141,9 +146,9 @@ export class PayInOutView extends React.Component {
   }
 
   handleReturnValue () {
-    if (this.props.router.locationBeforeTransitions.hash !== "") {
+    if (this.props.router.locationBeforeTransitions.hash !== '') {
       var address = this.props.router.locationBeforeTransitions.hash.split('state=')[1]
-      if (this.props.profile.idToken !== null && this.props.profile.idToken !== "") {
+      if (this.props.profile.idToken !== null && this.props.profile.idToken !== '') {
         // this.context.router.push('/points#state=' + address)
         return 'https://www.fantasypollster.com/games/' + address
       }
@@ -196,23 +201,37 @@ export class PayInOutView extends React.Component {
           <span className={s.title}>Pay Out</span>
           <span className={s.information}>Refund points back to your PayPal account or via check.</span>
           {this.renderCheckBox()}
-          <input type='number' placeholder='Amount' onChange={this.handleEmail}></input>
-          <input type='text' placeholder='Email' onChange={this.handleEmail}></input>
-          <input type='text' placeholder='Address Line 1' onChange={this.handleAddressLine1}></input>
-          <input type='text' placeholder='Address Line 2' onChange={this.handleAddressLine2}></input>
-          <input type='text' placeholder='City' onChange={this.handleCity}></input>
-          <input type='number' placeholder='Zip' onChange={this.handleZip}></input>
-          <input type='text' placeholder='State' onChange={this.handleState}></input>
-
+          {this.renderInputs()}
           {this.renderSubmit()}
-
         </div>
         <Footer />
       </div>
     )
   }
 
+  renderInputs () {
+    if (this.state.submit === true && !(this.state.email === '' || this.state.addressline1 === '' || this.state.city === '' || this.state.zip === '' || this.state.state === '' || this.state.method === '')) {
+      return
+    } else {
+      return (
+        <div className={s.inputs}>
+          <input type='number' className={s.amount} placeholder='$ Amount' onChange={this.handleAmount}></input>
+          <input type='text' placeholder='Email' onChange={this.handleEmail}></input>
+          <input type='text' placeholder='Name' onChange={this.handleName}></input>
+          <input type='text' placeholder='Address Line 1' onChange={this.handleAddressLine1}></input>
+          <input type='text' placeholder='Address Line 2' onChange={this.handleAddressLine2}></input>
+          <input type='text' placeholder='City' onChange={this.handleCity}></input>
+          <input type='text' placeholder='State' onChange={this.handleState}></input>
+          <input type='number' className={s.amount} placeholder='Zip' onChange={this.handleZip}></input>
+        </div>
+      )
+    }
+  }
+
   renderCheckBox () {
+    if (this.state.submit === true && !(this.state.email === '' || this.state.addressline1 === '' || this.state.city === '' || this.state.zip === '' || this.state.state === '' || this.state.method === '')) {
+      return
+    }
     if (this.state.method === '') {
       return (
         <div className={s.checkboxes}>
@@ -239,6 +258,14 @@ export class PayInOutView extends React.Component {
 
   handleCheckBox (e) {
     this.setState({method: e.target.value, submit: false})
+  }
+
+  handleName (e) {
+    this.setState({name: e.target.value, submit: false})
+  }
+
+  handleAmount (e) {
+    this.setState({amount: e.target.value, submit: false})
   }
 
   handleEmail (e) {
@@ -273,14 +300,14 @@ export class PayInOutView extends React.Component {
   // state: '',
   // method: ''
   renderSubmit () {
-    if (this.state.submit === true && (this.state.email === '' || this.state.addressline1 === '' || this.state.city === '' || this.state.zip === '' || this.state.state === '' || this.state.method === '')) {
+    if (this.state.submit === true && (this.state.email === '' || this.state.addressline1 === '' || this.state.city === '' || this.state.zip === '' || this.state.state === '' || this.state.method === '' || this.state.amount === 0 || this.state.name === '')) {
       return (
         <div className={s.submitdiv}>
           <div className={s.submitPayout} onClick={this.handleSubmit}><span className={s.submitText}>SUBMIT</span></div>
           <span className={s.submitError}>Form is incomplete! Please fill in the information above.</span>
         </div>
       )
-    } else if (this.state.submit === true && !(this.state.email === '' || this.state.addressline1 === '' || this.state.city === '' || this.state.zip === '' || this.state.state === '' || this.state.method === '')) {
+    } else if (this.state.submit === true && !(this.state.email === '' || this.state.addressline1 === '' || this.state.city === '' || this.state.zip === '' || this.state.state === '' || this.state.method === '' || this.state.amount === 0 || this.state.name === '')) {
       return (
         <div className={s.submitdiv}>
           <span className={s.submitGood}>Awesome! Look out for an email from us containing more details. If you don't see an email within 8 hours, fill this form out again. If you still don't see one, contact us directly at accounts@fantasypollster.com</span>
@@ -297,6 +324,18 @@ export class PayInOutView extends React.Component {
 
   handleSubmit () {
     this.setState({submit: true})
+    var address = this.state.addressline1 + ', ' + this.state.addressline2 + ', ' + this.state.city + ', ' + this.state.state + ' ' + this.state.zip
+    var amount = this.state.amount
+    var check
+    if (this.state.method === 'Paypal') {
+      check = true
+    } else {
+      check = false
+    }
+    var name = this.state.name
+    var email = this.state.email
+    // console.log('address, amount, check, name, email', address, amount, check, name, email)
+    this.props.profileActions.payout(amount, address, check, email, name)
   }
 
 }

@@ -82,7 +82,7 @@ export class GameView extends React.Component {
     }, 1000)
     this.timer2 = setInterval(() => {
       this.props.gamesActions.getStats(this.props.routeParams.id)
-    }, 10000)
+    }, 1000)
   }
 
   componentWillUnmount () {
@@ -178,7 +178,7 @@ export class GameView extends React.Component {
               <div key={c.name + 'dark'} className={s.candidateBoxBottomDark} onClick={this.handleChoice.bind(this, name, id)}>
                 <img src={c.img} className={s.candidateImage}/>
                 <span className={s.candidateBoxTitle}>{c.name}</span>
-                <span className={s.candidateScore}>{'19'}</span>
+                <span className={s.candidateScore}>{this.handleStats(id)}</span>
               </div>
             )
           }
@@ -186,7 +186,7 @@ export class GameView extends React.Component {
             <div key={c.name} className={s.candidateBoxBottom} onClick={this.handleChoice.bind(this, name, id)}>
               <img src={c.img} className={s.candidateImage}/>
               <span className={s.candidateBoxTitle}>{c.name}</span>
-              <span className={s.candidateScore}>{'19'}</span>
+              <span className={s.candidateScore}>{this.handleStats(id)}</span>
             </div>
           )
         }
@@ -197,7 +197,7 @@ export class GameView extends React.Component {
             <div key={c.name + 'dark'} className={s.candidateBoxDark} onClick={this.handleChoice.bind(this, name, id)}>
               <img src={c.img} className={s.candidateImage}/>
               <span className={s.candidateBoxTitle}>{c.name}</span>
-              <span className={s.candidateScore}>{'19'}</span>
+              <span className={s.candidateScore}>{this.handleStats(id)}</span>
             </div>
           )
         }
@@ -205,11 +205,22 @@ export class GameView extends React.Component {
           <div key={c.name} className={s.candidateBox} onClick={this.handleChoice.bind(this, name, id)}>
             <img src={c.img} className={s.candidateImage}/>
             <span className={s.candidateBoxTitle}>{c.name}</span>
-            <span className={s.candidateScore}>{'19'}</span>
+            <span className={s.candidateScore}>{this.handleStats(id)}</span>
           </div>
         )
       }.bind(this))
     }
+  }
+
+  handleStats (id) {
+    if (this.props.games.stats.total === 0) {
+      return 0
+    } else {
+      if (this.props.games.immutablestats.has(id)) {
+        return this.props.games.immutablestats.get(id)
+      }
+    }
+    return 0
   }
 
   handleChoice = function (name, id) {

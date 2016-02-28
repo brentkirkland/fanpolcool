@@ -52,11 +52,10 @@ export class GamesView extends React.Component {
     routeParams: React.PropTypes.object.isRequired,
     candidates: React.PropTypes.object.isRequired,
     candidatesActions: React.PropTypes.object.isRequired,
-    stateRouter:React.PropTypes.object.isRequired
+    stateRouter: React.PropTypes.object.isRequired
   };
 
   componentWillMount () {
-
     if (this.props.route.path === '/games/:id') {
       // if (Object.keys(this.props.profile.profile).length === 0) {
       //   this.context.router.push('/games')
@@ -88,16 +87,16 @@ export class GamesView extends React.Component {
     if (!this.props.profile.verified) {
       this.context.router.push('/accept')
     }
-    if (this.props.stateRouter.locationBeforeTransitions.hash !== "") {
+    if (this.props.stateRouter.locationBeforeTransitions.hash !== '') {
       var address = this.props.stateRouter.locationBeforeTransitions.hash.split('state=')[1]
-      if (this.props.profile.idToken !== null && this.props.profile.idToken !== "") {
+      if (this.props.profile.idToken !== null && this.props.profile.idToken !== '') {
         this.context.router.push('/games/' + address)
       }
     }
   }
 
   componentWillUnmount () {
-    clearTimeout(this.timer);
+    clearTimeout(this.timer)
   }
 
   render () {
@@ -244,7 +243,7 @@ export class GamesView extends React.Component {
     return 'R'
   }
 
-  convertMS(ms) {
+  convertMS (ms) {
     var d, h, m, s
     s = Math.floor(ms / 1000)
     m = Math.floor(s / 60)
@@ -258,8 +257,8 @@ export class GamesView extends React.Component {
 
   mapGames () {
     return this.props.games.items.map(function (game, i, a) {
-      var to = this.convertMS(Date.parse(game.closedate) - this.state.time);
-      function n(n){
+      var to = this.convertMS(Date.parse(game.closedate) - this.state.time)
+      function n (n) {
         return n > 9 ? '' + n: '0' + n
       }
       if (this.props.routeParams.id === game._id) {
@@ -288,24 +287,24 @@ export class GamesView extends React.Component {
         return (
           <Link key={'himom' + i} to={'/games/' + game._id}>
             <div key={'hidad' + i} className={s.gameRowBottom}>
-            <div className={s.partyDiv}>
-              <span className={s.gameName}>{this.abr(game.party)}</span>
-            </div>
-            <div className={s.gameStuff}>
-              <span className={s.gameName}>{game.statename}</span>
-            </div>
-            <div className={s.timeDiv}>
-              <span className={s.gameName}>{n(to.d) + ':' + n(to.h) + ':' + n(to.m) + ':' + n(to.s)}</span>
-            </div>
-            <div className={s.gameSize}>
-              <span className={s.gameName}>{game.entries + '/' + game.maxsize}</span>
-            </div>
-            <div className={s.gameMoney2}>
-              <span className={s.gameName}>{'$' + game.reward}</span>
-            </div>
-            <div className={s.gameMoney}>
-              <span className={s.gameName}>{'$' + game.entry}</span>
-            </div>
+              <div className={s.partyDiv}>
+                <span className={s.gameName}>{this.abr(game.party)}</span>
+              </div>
+              <div className={s.gameStuff}>
+                <span className={s.gameName}>{game.statename}</span>
+              </div>
+              <div className={s.timeDiv}>
+                <span className={s.gameName}>{n(to.d) + ':' + n(to.h) + ':' + n(to.m) + ':' + n(to.s)}</span>
+              </div>
+              <div className={s.gameSize}>
+                <span className={s.gameName}>{game.entries + '/' + game.maxsize}</span>
+              </div>
+              <div className={s.gameMoney2}>
+                <span className={s.gameName}>{'$' + game.reward}</span>
+              </div>
+              <div className={s.gameMoney}>
+                <span className={s.gameName}>{'$' + game.entry}</span>
+              </div>
             </div>
           </Link>
         )

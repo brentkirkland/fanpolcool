@@ -10,6 +10,7 @@ export const RECIEVE_GAMES = 'RECIEVE_GAMES'
 export const ADD_IMMUTABILITY_GAMES = 'ADD_IMMUTABILITY_GAMES'
 export const INVALIDATE_GAMES = 'INVALIDATE_GAMES'
 export const ADD_STATS = 'ADD_STATS'
+export const ADD_IMMUTABLE_STATS = 'ADD_IMMUTABLE_STATS'
 export const CLEAR_STATS = 'CLEAR_STATS'
 // ------------------------------------
 // Actions
@@ -20,6 +21,7 @@ const recieveGames = createAction(RECIEVE_GAMES, (json = []) => json)
 const addImmutabilityGames = createAction(ADD_IMMUTABILITY_GAMES, (x = []) => x)
 const requestGames = createAction(REQUEST_GAMES)
 const addStats = createAction(ADD_STATS, (x = {}) => x)
+const addImmutableStats = createAction(ADD_IMMUTABLE_STATS, (x = {}) => x)
 const clearStatsKid = createAction(CLEAR_STATS)
 
 function fetchGames () {
@@ -55,12 +57,9 @@ function makeImmutable (json) {
 
 function alsoMakeImmutable (json) {
   return (dispatch) => {
-    var y = {}
-    for (var i = 0; i < json.length; i++) {
-      y[json[i]._id] = json[i]
-    }
-    var x = Immutable.Map(y)
-    dispatch(addStats(x))
+    dispatch(addStats(json))
+    var x = Immutable.Map(json.stats)
+    dispatch(addImmutableStats(x))
   }
 }
 
@@ -111,7 +110,7 @@ export const getStats = (current) => {
         method: 'GET',
         cache: false
       })
-      getFoos.then((response) => response.json()).then((json) => dispatch(addStats(json)))
+      getFoos.then((response) => response.json()).then((json) => dispatch(alsoMakeImmutable(json)))
     }
   }
 }
@@ -124,13 +123,13 @@ export const clearStats = () => {
 
 export const submitGame = (candidate, match) => {
   return (dispatch) => {
-    console.log('hi')
-    var x = JSON.stringify({
-      prediction: candidate,
-      match: match
-    })
-    console.log('token: ', localStorage.getItem('userToken'), 'body: ', x)
-    var p = fetch('https://api.fantasypollster.com/api/matches/flash/position', {
+    // console.log('hi')
+    // var x = JSON.stringify({
+    //   prediction: candidate,
+    //   match: match
+    // })
+    // console.log('token: ', localStorage.getItem('userToken'), 'body: ', x)
+    fetch('https://api.fantasypollster.com/api/matches/flash/positions', {
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
         'Accept': 'application/json',
@@ -172,10 +171,13 @@ export default handleActions({
   [ADD_STATS]: (state, action) => (Object.assign({}, state, {
     stats: action.payload
   })),
+  [ADD_IMMUTABLE_STATS]: (state, action) => (Object.assign({}, state, {
+    immutablestats: action.payload
+  })),
   [CLEAR_STATS]: (state, action) => (Object.assign({}, state, {
     stats: {}
   })),
   [ADD_IMMUTABILITY_GAMES]: (state, action) => (Object.assign({}, state, {
     mappedItems: action.payload
   }))
-}, {didInvalidate: false, isFetching: false, items: [], stats: {}, mappedItems: Immutable.Map({bk123: 'hi'})})
+}, {didInvalidate: false, isFetching: false, items: [], stats: {}, immutablestats: {}, mappedItems: Immutable.Map({bk123: 'hi'})})
