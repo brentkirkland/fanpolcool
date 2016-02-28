@@ -82,7 +82,7 @@ export class GameView extends React.Component {
     }, 1000)
     this.timer2 = setInterval(() => {
       this.props.gamesActions.getStats(this.props.routeParams.id)
-    }, 1000)
+    }, 10000)
   }
 
   componentWillUnmount () {
@@ -98,6 +98,16 @@ export class GameView extends React.Component {
     if (!this.props.profile.verified) {
       this.context.router.push('/accept#state=' + this.props.routeParams.id)
     }
+
+    if (this.props.candidates.items.length > 0 && Object.keys(this.props.games.stats).length === 0) {
+      this.props.gamesActions.getStats(this.props.routeParams.id)
+    }
+
+    // if (this.props.games.items.length > 0 && Object.keys(this.props.games.stats).length > 0) {
+    //   if (this.props.games.mappedItems.get(this.props.routeParams.id).maxsize <= this.props.games.stats.total ) {
+    //     this.context.router.push('/games')
+    //   }
+    // }
   }
 
   render () {
@@ -152,15 +162,37 @@ export class GameView extends React.Component {
       return (
         <div className={s.root3}>
           <div className={s.container3}>
+            <div className={s.candidatekey}>
+              <span className={s.candidateKeyTitle}>CANDIDATE</span>
+              <div className={s.fifty}/>
+              <span className={s.candidateTitleMPE}>{this.handleLengthString()}</span>
+              <span className={s.candidateKeyScore}>{this.handlePercentageLength()}</span>
+            </div>
             {this.mapCandidates()}
           </div>
           <div className={s.container4}>
-            <span className={s.gameOutcome}>{'The outcome is determined by the accumulated results of the polls taken in each individual precinct of ' + this.props.games.mappedItems.get(this.props.routeParams.id).statename + '. Results will be posted after each precint of ' + this.props.games.mappedItems.get(this.props.routeParams.id).statename + ' has accounted every vote.'}</span>
+            <span className={s.gameOutcome}>{'The outcome is determined by the accumulated results of the polls taken in each individual precinct of ' + this.props.games.mappedItems.get(this.props.routeParams.id).statename + '. Results will be posted after each precinct of ' + this.props.games.mappedItems.get(this.props.routeParams.id).statename + ' has accounted every vote.'}</span>
           </div>
         </div>
       )
     }
     return
+  }
+
+  handleLengthString () {
+    if (this.props.containerWidth < 700) {
+      return 'MAX WIN'
+    } else {
+      return 'MAX EARNINGS'
+    }
+  }
+
+  handlePercentageLength () {
+    if (this.props.containerWidth < 600) {
+      return '%'
+    } else {
+      return 'PERCENTAGE'
+    }
   }
 
   mapCandidates () {
@@ -178,7 +210,8 @@ export class GameView extends React.Component {
               <div key={c.name + 'dark'} className={s.candidateBoxBottomDark} onClick={this.handleChoice.bind(this, name, id)}>
                 <img src={c.img} className={s.candidateImage}/>
                 <span className={s.candidateBoxTitle}>{c.name}</span>
-                <span className={s.candidateScore}>{this.handleStats(id)}</span>
+                <span className={s.candidateMoney}>{'$' + this.handleMPE(id)}</span>
+                <span className={s.candidateScore}>{this.handleStats(id) + '%'}</span>
               </div>
             )
           }
@@ -186,7 +219,8 @@ export class GameView extends React.Component {
             <div key={c.name} className={s.candidateBoxBottom} onClick={this.handleChoice.bind(this, name, id)}>
               <img src={c.img} className={s.candidateImage}/>
               <span className={s.candidateBoxTitle}>{c.name}</span>
-              <span className={s.candidateScore}>{this.handleStats(id)}</span>
+              <span className={s.candidateMoney}>{'$' + this.handleMPE(id)}</span>
+              <span className={s.candidateScore}>{this.handleStats(id) + '%'}</span>
             </div>
           )
         }
@@ -197,7 +231,8 @@ export class GameView extends React.Component {
             <div key={c.name + 'dark'} className={s.candidateBoxDark} onClick={this.handleChoice.bind(this, name, id)}>
               <img src={c.img} className={s.candidateImage}/>
               <span className={s.candidateBoxTitle}>{c.name}</span>
-              <span className={s.candidateScore}>{this.handleStats(id)}</span>
+              <span className={s.candidateMoney}>{'$' + this.handleMPE(id)}</span>
+              <span className={s.candidateScore}>{this.handleStats(id) + '%'}</span>
             </div>
           )
         }
@@ -205,7 +240,8 @@ export class GameView extends React.Component {
           <div key={c.name} className={s.candidateBox} onClick={this.handleChoice.bind(this, name, id)}>
             <img src={c.img} className={s.candidateImage}/>
             <span className={s.candidateBoxTitle}>{c.name}</span>
-            <span className={s.candidateScore}>{this.handleStats(id)}</span>
+            <span className={s.candidateMoney}>{'$' + this.handleMPE(id)}</span>
+            <span className={s.candidateScore}>{this.handleStats(id) + '%'}</span>
           </div>
         )
       }.bind(this))
@@ -216,11 +252,33 @@ export class GameView extends React.Component {
     if (this.props.games.stats.total === 0) {
       return 0
     } else {
-      if (this.props.games.immutablestats.has(id)) {
-        return this.props.games.immutablestats.get(id)
+      if (Object.keys(this.props.games.immutablestats).length > 0) {
+        if (this.props.games.immutablestats.has(id)) {
+          return (this.props.games.immutablestats.get(id) / this.props.games.stats.total * 100).toFixed(2)
+        } else {
+          return 0
+        }
+      } else {
+        return 0
       }
     }
-    return 0
+  }
+
+  handleMPE (id) {
+    var game = this.props.games.mappedItems.get(this.props.routeParams.id)
+    if (this.props.games.stats.total === 0) {
+      return game.reward
+    } else {
+      if (Object.keys(this.props.games.immutablestats).length > 0) {
+        if (this.props.games.immutablestats.has(id)) {
+          return game.reward / (this.props.games.immutablestats.get(id) + 1)
+        } else {
+          return game.reward
+        }
+      } else {
+        return game.reward
+      }
+    }
   }
 
   handleChoice = function (name, id) {
@@ -291,7 +349,7 @@ export class GameView extends React.Component {
               </div>
               <div className={s.gameSize}>
                 <span className={s.gameUnderText}>GAME SIZE</span>
-                <span className={s.gameName}>{game.entries + ' / ' + game.maxsize}</span>
+                <span className={s.gameName}>{this.handleSize(game.entries) + ' / ' + game.maxsize}</span>
               </div>
               <div className={s.gameMoney2}>
                 <span className={s.gameUnderText}>TOTAL WINNINGS</span>
@@ -305,6 +363,14 @@ export class GameView extends React.Component {
           </div>
         )
       }
+    }
+  }
+
+  handleSize (entries) {
+    if (Object.keys(this.props.games.stats).length === 0) {
+      return entries
+    } else {
+      return this.props.games.stats.total
     }
   }
 

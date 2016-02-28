@@ -126,7 +126,7 @@ export class PayInOutView extends React.Component {
           <input type='hidden' name='business' value='WR3V3DZ5JFR84'/>
           <input type='hidden' name='lc' value='US'/>
           <input type='hidden' name='item_name' value='Fantasy Pollster Points'/>
-          <input type='hidden' name='custom' value='auth0|56ad2cb00dd7b9005ba87a7c'/>
+          <input type='hidden' name='custom' value={this.props.profile.profile.user_id}/>
           <input type='hidden' name='button_subtype' value='services'/>
           <input type='hidden' name='no_note' value='1'/>
           <input type='hidden' name='no_shipping' value='1'/>

@@ -217,6 +217,21 @@
   padding: 10px;
 }
 
+.candidatekey {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  color: black;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .candidateBoxBottomDark {
   display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
   display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
@@ -293,11 +308,49 @@
   flex: 1;
 }
 
+.candidateKeyTitle {
+  font-size: .75em;
+  text-align: left;
+  flex: 1;
+}
+
+.candidateTitleMPE {
+  font-size: .75em;
+  text-align: left;
+  padding-right: 10px;
+  flex: 0.2;
+  min-width: 75px;
+}
+
+.fifty {
+  width: 70px;
+}
+
+.candidateKeyScore {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: .75em;
+  text-align: right;
+  flex: 0.2;
+}
+
 .candidateScore {
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 1.25em;
+  text-align: right;
+  font-weight: 300;
+  flex: 0.2;
+}
+
+.candidateMoney {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
   font-size: 1.25em;
   font-weight: 300;
-  text-align: right;
+  flex: 0.2;
+  min-width: 75px;
 }
 
 .gameOutcome {
@@ -522,4 +575,59 @@
   flex: 0.4;
   min-width: 25px;
   padding-right: 10px;
+}
+
+@media screen and (max-width: 580px) {
+
+  .candidateTitleMPE {
+    font-size: .75em;
+    text-align: left;
+    padding-right: 10px;
+    flex: 0.3;
+    min-width: 75px;
+  }
+
+  .fifty {
+    width: 70px;
+  }
+
+  .candidateKeyScore {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: .75em;
+    text-align: right;
+    flex: 0.25;
+  }
+
+  .candidateImage {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%
+  }
+  .candidateBoxTitle {
+    padding: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    text-align: left;
+    flex: 1;
+  }
+
+  .candidateScore {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1em;
+    text-align: right;
+    font-weight: 300;
+    flex: 0.25;
+  }
+
+  .candidateMoney {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    font-size: 1em;
+    font-weight: 300;
+    flex: 0.3;
+    min-width: 75px;
+  }
 }
