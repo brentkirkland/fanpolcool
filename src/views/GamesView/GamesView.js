@@ -90,7 +90,11 @@ export class GamesView extends React.Component {
     if (this.props.stateRouter.locationBeforeTransitions.hash !== '') {
       var address = this.props.stateRouter.locationBeforeTransitions.hash.split('state=')[1]
       if (this.props.profile.idToken !== null && this.props.profile.idToken !== '') {
-        this.context.router.push('/games/' + address)
+        if (address === undefined) {
+          this.context.router.push('/games/')
+        } else {
+          this.context.router.push('/games/' + address)
+        }
       }
     }
   }
@@ -194,6 +198,7 @@ export class GamesView extends React.Component {
         <div className={s.title}>
           <div className={s.gameStuff}>
             <span className={s.gameName2}>Available Games</span>
+            <Link to='/games/mine'><span className={s.gameName3}>My Games</span></Link>
           </div>
         </div>
       )

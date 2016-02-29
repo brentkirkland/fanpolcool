@@ -440,7 +440,7 @@ export class GameView extends React.Component {
 
   actuallySubmit () {
     this.props.gamesActions.submitGame(this.state.candidateid, this.props.routeParams.id)
-    this.context.router.push('/games')
+    this.context.router.push('/games/mine')
   }
 
   handleSubmit () {

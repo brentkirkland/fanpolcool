@@ -74,7 +74,7 @@ export class Navigation extends Component {
         icon: 'https://s3-us-west-2.amazonaws.com/static-assets-fanpol/sadcyclops.png',
         primaryColor: '#5c666f',
         socialBigButtons: true,
-        callbackURL: 'https://fantasypollster.com/games',
+        callbackURL: 'http://localhost:3000/games',
         responseType: 'token'})
     } else {
       localStorage.removeItem('userToken')
@@ -82,7 +82,7 @@ export class Navigation extends Component {
         icon: 'https://s3-us-west-2.amazonaws.com/static-assets-fanpol/sadcyclops.png',
         primaryColor: '#5c666f',
         socialBigButtons: true,
-        callbackURL: 'https://fantasypollster.com/games',
+        callbackURL: 'http://localhost:3000/games',
         responseType: 'token'})
     }
   }
@@ -117,7 +117,6 @@ export class Navigation extends Component {
   }
 
   showDropDown () {
-    console.log('show')
     if (this.state.dropdown) {
       if (this.props.profile.idToken === null || this.props.profile.idToken === '') {
         return (

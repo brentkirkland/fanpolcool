@@ -70,6 +70,12 @@ export class PayInOutView extends React.Component {
     this.setState({amount: 0, inputamount: '', error: 'Select an amount above.', highlight: false, acceptable: false})
   }
 
+  componentDidMount () {
+    if (localStorage.getItem('userToken') === null) {
+      this.context.router.push('/games')
+    }
+  }
+
   whatToDarken (num) {
     if (num === this.state.amount) {
       if (num === 5) {

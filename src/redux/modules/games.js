@@ -12,6 +12,7 @@ export const INVALIDATE_GAMES = 'INVALIDATE_GAMES'
 export const ADD_STATS = 'ADD_STATS'
 export const ADD_IMMUTABLE_STATS = 'ADD_IMMUTABLE_STATS'
 export const CLEAR_STATS = 'CLEAR_STATS'
+export const GET_MINE = 'GET_MINE'
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -23,6 +24,7 @@ const requestGames = createAction(REQUEST_GAMES)
 const addStats = createAction(ADD_STATS, (x = {}) => x)
 const addImmutableStats = createAction(ADD_IMMUTABLE_STATS, (x = {}) => x)
 const clearStatsKid = createAction(CLEAR_STATS)
+const myGames = createAction(GET_MINE, (x = {}) => x)
 
 function fetchGames () {
   return (dispatch) => {
@@ -99,19 +101,17 @@ export const forceFetchGames = () => {
 
 export const getStats = (current) => {
   return (dispatch, getState) => {
-    if (getState().profile.idToken !== null && getState().profile.idToken !== '') {
-      var url = 'https://api.fantasypollster.com/api/matches/flash/stats/' + current
-      var getFoos = fetch(url, {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        method: 'GET',
-        cache: false
-      })
-      getFoos.then((response) => response.json()).then((json) => dispatch(alsoMakeImmutable(json)))
-    }
+    var url = 'https://api.fantasypollster.com/api/matches/flash/stats/' + current
+    var getFoos = fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'GET',
+      cache: false
+    })
+    getFoos.then((response) => response.json()).then((json) => dispatch(alsoMakeImmutable(json)))
   }
 }
 
@@ -143,13 +143,40 @@ export const submitGame = (candidate, match) => {
     })
   }
 }
+function handleMe (json) {
+  return (dispatch) => {
+    json.sort(function (a, b) {
+      var aa = Date.parse(a.created)
+      var bb = Date.parse(b.created)
+
+      return bb - aa
+    })
+    return dispatch(myGames(json))
+  }
+}
+
+// /api/matches/flash/positions/mine
+export const getMine = () => {
+  return (dispatch) => {
+    fetch('https://api.fantasypollster.com/api/matches/flash/positions/mine', {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'GET',
+      cache: false
+    }).then((response) => response.json()).then((json) => dispatch(handleMe(json)))
+  }
+}
 
 export const actions = {
   fetchGamesIfNeeded,
   forceFetchGames,
   getStats,
   clearStats,
-  submitGame
+  submitGame,
+  getMine
 }
 
 // ------------------------------------
@@ -177,7 +204,10 @@ export default handleActions({
   [CLEAR_STATS]: (state, action) => (Object.assign({}, state, {
     stats: {}
   })),
+  [GET_MINE]: (state, action) => (Object.assign({}, state, {
+    mine: action.payload
+  })),
   [ADD_IMMUTABILITY_GAMES]: (state, action) => (Object.assign({}, state, {
     mappedItems: action.payload
   }))
-}, {didInvalidate: false, isFetching: false, items: [], stats: {}, immutablestats: {}, mappedItems: Immutable.Map({bk123: 'hi'})})
+}, {didInvalidate: false, isFetching: false, items: [], stats: {}, immutablestats: {}, mine: [], mappedItems: Immutable.Map({bk123: 'hi'})})
