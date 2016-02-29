@@ -17,7 +17,7 @@ export class Hello extends React.Component {
   render () {
     return (
       <div className='container text-center'>
-        <h1>PAGE NOT FOUND. GO BACK! TROUBLE AHEAD. LEAVE BEFORE YOU CAN. DON'T GOasfavfakdf adjfh adlfjba dglasg  alskdhg ... .. ..</h1>
+        <h1>404. PAGE NOT FOUND. Sorry!</h1>
       </div>
     )
   }

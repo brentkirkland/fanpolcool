@@ -12,6 +12,7 @@ class Header extends Component {
           <span className={s.element2}>© 2016. All Rights Reserved</span>
           <Link to='/terms'><span className={s.element1}>Terms of Use</span></Link>
           <Link to='/privacy'><span className={s.element1}>Privacy Policy</span></Link>
+          <Link to='/contact'><span className={s.element1}>Contact</span></Link>
         </div>
       </div>
     )

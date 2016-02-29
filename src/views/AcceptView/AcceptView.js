@@ -52,7 +52,8 @@ export class AcceptView extends React.Component {
     profile: React.PropTypes.object.isRequired,
     profileActions: React.PropTypes.object.isRequired,
     route: React.PropTypes.object.isRequired,
-    router: React.PropTypes.object.isRequired
+    router: React.PropTypes.object.isRequired,
+    routeParams: React.PropTypes.object.isRequired
   };
 
   componentWillMount () {

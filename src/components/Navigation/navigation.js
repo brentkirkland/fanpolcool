@@ -10,7 +10,8 @@ var Shape = ReactART.Shape
 var Surface = ReactART.Surface
 
 const mapStateToProps = (state) => ({
-  profile: state.profile
+  profile: state.profile,
+  router: state.router
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -35,11 +36,13 @@ export class Navigation extends Component {
     containerWidth: React.PropTypes.number.isRequired,
     profile: React.PropTypes.object.isRequired,
     profileActions: React.PropTypes.object.isRequired,
-    route: React.PropTypes.object.isRequired
+    route: React.PropTypes.object.isRequired,
+    router: React.PropTypes.object.isRequired
   };
 
   static contextTypes = {
-    router: React.PropTypes.object
+    router: React.PropTypes.object,
+    history: React.PropTypes.object
   };
 
   componentWillMount () {
@@ -62,6 +65,9 @@ export class Navigation extends Component {
         this.props.profileActions.logout()
       }
     }
+    if (Object.keys(this.props.profile.ga).length > 0) {
+      this.props.profile.ga.pageview(this.props.router.locationBeforeTransitions.pathname + this.props.router.locationBeforeTransitions.hash)
+    }
   }
 
   showLock () {
@@ -74,7 +80,7 @@ export class Navigation extends Component {
         icon: 'https://s3-us-west-2.amazonaws.com/static-assets-fanpol/sadcyclops.png',
         primaryColor: '#5c666f',
         socialBigButtons: true,
-        callbackURL: 'http://localhost:3000/games',
+        callbackURL: 'https://fantasypollster.com/games',
         responseType: 'token'})
     } else {
       localStorage.removeItem('userToken')
@@ -82,7 +88,7 @@ export class Navigation extends Component {
         icon: 'https://s3-us-west-2.amazonaws.com/static-assets-fanpol/sadcyclops.png',
         primaryColor: '#5c666f',
         socialBigButtons: true,
-        callbackURL: 'http://localhost:3000/games',
+        callbackURL: 'https://fantasypollster.com/games',
         responseType: 'token'})
     }
   }

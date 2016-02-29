@@ -291,7 +291,7 @@ export class GameView extends React.Component {
         authParams: {
           state: this.props.routeParams.id
         },
-        callbackURL: 'http://localhost:3000/games',
+        callbackURL: 'https://fantasypollster.com/games',
         responseType: 'token'})
     } else if (game.entry > this.props.profile.balance) {
       this.context.router.push('/points#state=' + this.props.routeParams.id)
@@ -453,7 +453,7 @@ export class GameView extends React.Component {
         authParams: {
           state: this.props.routeParams.id
         },
-        callbackURL: 'http://localhost:3000/games',
+        callbackURL: 'https://fantasypollster.com/games',
         responseType: 'token'})
     } else if (game.entry > this.props.profile.balance) {
       this.context.router.push('/points#state=' + this.props.routeParams.id)

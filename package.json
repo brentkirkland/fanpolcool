@@ -81,6 +81,7 @@
     "react-art": "^0.14.0",
     "react-dimensions": "^1.0.2",
     "react-dom": "^0.14.0",
+    "react-ga": "^1.2.0",
     "react-redux": "^4.0.0",
     "react-router": "^2.0.0",
     "react-router-redux": "^4.0.0-beta",

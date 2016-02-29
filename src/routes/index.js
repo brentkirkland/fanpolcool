@@ -14,12 +14,14 @@ import MyGames from 'views/MyGames/MyGames'
 import AcceptView from 'views/AcceptView/AcceptView'
 import PayInOutView from 'views/PayInOutView/PayInOutView'
 import Terms from 'views/Terms/Terms'
+import Contact from 'views/Contact/Contact'
 import Privacy from 'views/Privacy/Privacy'
 import Hello from 'views/Hello/Hello'
 
 export default (store) => (
   <Route path='/' component={CoreLayout}>
     <IndexRoute component={HomeView} />
+    <Route path='/contact' component={Contact} />
     <Route path='/games' component={GamesView} />
     <Route path='/games/mine' component={MyGames} />
     <Route path='/games/:id' component={GameView} />

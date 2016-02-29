@@ -14,6 +14,7 @@ export const BALANCE = 'BALANCE'
 export const IS_FETCHING_BALANCE = 'IS_FETCHING_BALANCE'
 export const NOT_VERIFIED = 'NOT_VERIFIED'
 export const VERIFY = 'VERIFY'
+export const CREATE_GA = 'CREATE_GA'
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -26,6 +27,7 @@ const balance = createAction(BALANCE, (foos = 0) => foos)
 const isFetchingBalance = createAction(IS_FETCHING_BALANCE)
 const notverified = createAction(NOT_VERIFIED)
 const verify = createAction(VERIFY)
+const createGa = createAction(CREATE_GA, (ga = {}) => ga)
 
 function getIdToken (lock) {
   var idToken = localStorage.getItem('userToken')
@@ -37,7 +39,7 @@ function getIdToken (lock) {
       localStorage.setItem('userToken', authHash.id_token)
     }
     if (authHash.error) {
-      console.log('Error signing in', authHash)
+      // console.log('Error signing in', authHash)
       return null
     }
   }
@@ -56,6 +58,10 @@ export const createLock = (profile) => {
       token = getIdToken(profile.lock)
       dispatch(setToken(token))
     }
+    var ga = require('react-ga')
+    var options = { debug: false }
+    ga.initialize('UA-73554813-1', options)
+    dispatch(createGa(ga))
   }
 }
 
@@ -203,10 +209,13 @@ export default handleActions({
   [VERIFY]: (state, action) => (Object.assign({}, state, {
     verified: true
   })),
+  [CREATE_GA]: (state, action) => (Object.assign({}, state, {
+    ga: action.payload
+  })),
   [REMOVE_DATA]: (state, action) => (Object.assign({}, state, {
     idToken: '',
     profile: {},
     balance: 0,
     verified: true
   }))
-}, {profile: {}, idToken: '', lock: {}, error: false, balance: 0, isFetchingBalance: false, verified: true})
+}, {profile: {}, idToken: '', lock: {}, error: false, balance: 0, isFetchingBalance: false, ga: {}, verified: true})

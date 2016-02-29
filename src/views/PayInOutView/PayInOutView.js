@@ -341,7 +341,7 @@ export class PayInOutView extends React.Component {
     var name = this.state.name
     var email = this.state.email
     // console.log('address, amount, check, name, email', address, amount, check, name, email)
-    this.props.profileActions.payout(amount, address, check, email, name)
+    this.props.profileActions.payout(address, amount, check, email, name)
   }
 
 }
