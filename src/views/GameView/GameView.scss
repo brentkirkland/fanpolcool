@@ -7,6 +7,7 @@
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;
   flex-direction: column-reverse;
+  color: #1a1a1a;
 }
 
 .container2 {
@@ -17,11 +18,13 @@
   display: -ms-flexbox;      /* TWEENER - IE 10 */
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-end;
   width: 100%;
-  padding: 10px;
+  color: #1a1a1a;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
 }
 
 .container3 {
@@ -32,14 +35,114 @@
   display: -ms-flexbox;      /* TWEENER - IE 10 */
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  width: 100%;
+  padding-top: 10px;
+  color:  white;
+}
+
+.container22 {
+  margin: 0 auto;
+  max-width: 930px;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
-  margin-top: 10px;
+  padding-right: 10px;
+  height: 65px;
+  color: #1a1a1a;
+}
+
+.container23 {
+  margin: 0 auto;
+  max-width: 930px;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  color:  white;
+}
+
+.containername {
+  margin: 0 auto;
+  max-width: 930px;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 10px;
+  color:  white;
+}
+
+.gamenametop {
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 1em;
+  text-align: left;
+  margin-right: 10px;
+}
+
+.adtext {
+  padding-top: 20px;
+  font-weight: 300;
+  font-size: 3em;
+  text-align: center;
+}
+
+.adtext2 {
+  font-weight: 300;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.adtext3 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  letter-spacing: 1px;
+  font-size: 1em;
+  padding-right: 30px;
+  text-align: center;
+}
+
+.adtext3O {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  letter-spacing: 1px;
+  font-size: 1em;
+  padding-right: 30px;
+  text-align: center;
+  opacity: 0.5;
+}
+
+.root44 {
+  background-color: rgb(246,248,248);
+  color: #1a1a1a;
+}
+
+.rootdark {
+  background-color: #112633;
+  color: white;
+  border-top-width: 1px;
+  border-top-color: #102C3B;
+  border-top-style: solid;
 }
 
 .container4 {
@@ -50,11 +153,37 @@
   display: -ms-flexbox;      /* TWEENER - IE 10 */
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
   padding: 10px;
-  margin-top: 10px;
+
   margin-bottom: 10px;
+  color: #1a1a1a;
+}
+
+.container44 {
+  margin: 0 auto;
+  max-width: 930px;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  margin-top: 30px;
+  color: #1a1a1a;
+}
+
+.gametitlediv {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 // .gameandinfo{
@@ -75,10 +204,31 @@
 
 .root {
   background-color: white;
+  color: #1a1a1a;
 }
 
 .root3 {
   background-color: rgb(255,255,255);
+  min-height: -webkit-calc(100vh - 35vh);
+  min-height:    -moz-calc(100vh - 35vh);
+  min-height:         calc(100vh - 35vh);
+  color: #1a1a1a;
+}
+
+.root4 {
+  background-color: #ff4351;
+}
+
+.root4r {
+  background-color: #ff4351;
+}
+
+.root4d {
+  background-color: #63a9fc;
+}
+
+.root4b {
+  background-color: #1a1a1a;
 }
 
 .games {
@@ -94,6 +244,9 @@
 .gameUnderText {
   text-transform: uppercase;
   font-size: .75em;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-right: 10px;
 }
 
 // .gameUnderPadding {
@@ -162,6 +315,8 @@
   flex-direction: row;
   align-items: center;
   width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .candidateBox {
@@ -177,9 +332,9 @@
   color: black;
   width: 100%;
   padding: 10px;
-  border-bottom-width: 1px;
-  border-bottom-color: #e5e6e6;
-  border-bottom-style: solid;
+  border-top-width: 1px;
+  border-top-color: #e5e6e6;
+  border-top-style: solid;
 }
 
 .candidateBoxDark {
@@ -197,9 +352,9 @@
   padding: 10px;
   background-color: rgb(248, 248, 248);
   border-radius: 2px;
-  border-bottom-width: 1px;
-  border-bottom-color: #e5e6e6;
-  border-bottom-style: solid;
+  border-top-width: 1px;
+  border-top-color: #e5e6e6;
+  border-top-style: solid;
 }
 
 .candidateBoxBottom {
@@ -252,17 +407,51 @@
 .submit {
   background-color: #ff4351;
   color: white;
-  border-radius: 2px;
+  cursor: pointer;
+  padding: 10px;
+  border-color: #ff4351;
+  border-width: 1px;
+  border-style: solid;
+  align-items: center;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.submitW {
+  background-color: #fafafa;
+  color: #ff4351;
+  border-color: #ff4351;
+  border-width: 1px;
+  border-style: solid;
   cursor: pointer;
   padding: 10px;
   align-items: center;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
 }
 
 .submitConfirm {
   background-color: #00cc66;
   color: white;
-  border-radius: 2px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
   cursor: pointer;
+  border-color: #00cc66;
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;
+  align-items: center;
+}
+
+.submitConfirmW {
+  background-color: #fafafa;
+  color: #00cc66;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  cursor: pointer;
+  border-color: #00cc66;
+  border-width: 1px;
+  border-style: solid;
   padding: 10px;
   align-items: center;
 }
@@ -270,8 +459,24 @@
 .submitOpac {
   background-color: #ff4351;
   color: white;
-  border-radius: 2px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
   cursor: pointer;
+  border-color: #ff4351;
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;
+  align-items: center;
+  opacity: 0.5;
+}
+
+.submitOpacW {
+  background-color: #fafafa;
+  color: #ff4351;
+  cursor: pointer;
+  border-color: #ff4351;
+  border-width: 1px;
+  border-style: solid;
   padding: 10px;
   align-items: center;
   opacity: 0.5;
@@ -355,6 +560,9 @@
 
 .gameOutcome {
 }
+.gameOutcomeBold {
+  font-weight: bold;
+}
 
 // .stateDiv {
 //   display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
@@ -388,7 +596,8 @@
 // }
 
 .gameName {
-  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: .75em;
 }
 
 .gameName2 {
@@ -457,7 +666,7 @@
 
 .gameRowColor {
   padding: 10px;
-  background-color: #112633;
+  background-color: #102C3B;
   display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
   display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
   display: -ms-flexbox;      /* TWEENER - IE 10 */
@@ -469,9 +678,7 @@
 }
 
 .gameRowColor2 {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: rgb(248, 248, 248);
+  background-color: white;
   display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
   display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
   display: -ms-flexbox;      /* TWEENER - IE 10 */
@@ -480,8 +687,6 @@
   flex-direction: row;
   color: black;
   align-items: center;
-  height: 80px;
-  margin-bottom: 10px;
 }
 
 .fakeunder {
@@ -518,11 +723,17 @@
   display: -ms-flexbox;      /* TWEENER - IE 10 */
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
-  justify-content: center;
-  flex: 0.3;
+  justify-content: space-between;
+  flex: 1;
   min-width: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-right: 10px;
+  border-bottom-color: #e5e6e6;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
 }
 
 .timeDiv {
@@ -531,11 +742,11 @@
   display: -ms-flexbox;      /* TWEENER - IE 10 */
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
-  justify-content: center;
-  flex: 0.7;
   min-width: 50px;
+  padding-bottom: 10px;
+  margin-right: 10px;
 }
 
 .gameSize {
@@ -544,10 +755,10 @@
   display: -ms-flexbox;      /* TWEENER - IE 10 */
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
-  justify-content: center;
-  flex: 0.5;
+  padding-bottom: 10px;
+  margin-left: 10px;
 }
 
 .gameMoney {
@@ -563,18 +774,44 @@
   min-width: 25px;
 }
 
+.gameinfotop {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  padding-top: 10px;
+}
+.gameinfobottom {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  padding-top: 10px;
+}
+
 .gameMoney2 {
   display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
   display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
   display: -ms-flexbox;      /* TWEENER - IE 10 */
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
-  justify-content: center;
-  flex: 0.4;
+  justify-content: space-between;
+  flex: 1;
   min-width: 25px;
-  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 10px;
+  border-bottom-color: #e5e6e6;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
 }
 
 @media screen and (max-width: 580px) {
@@ -609,7 +846,7 @@
     font-size: 1em;
     font-weight: 600;
     text-align: left;
-    flex: 1;
+    flex: 0.8;
   }
 
   .candidateScore {
@@ -619,6 +856,9 @@
     text-align: right;
     font-weight: 300;
     flex: 0.25;
+  }
+  .candidateKeyTitle {
+    flex: 0.8;
   }
 
   .candidateMoney {
@@ -630,4 +870,27 @@
     flex: 0.3;
     min-width: 75px;
   }
+
+  .container22 {
+    flex-direction: column;
+  }
+
+  .adtext3 {
+    font-size: .75em;
+  }
+  .adtext3O {
+    font-size: .75em;
+  }
+
+  .gameSize {
+    margin-left: 0;
+  }
+  .gameinfobottom {
+    flex-direction: column;
+  }
+
+  .container2 {
+    align-items: center;
+  }
+
 }

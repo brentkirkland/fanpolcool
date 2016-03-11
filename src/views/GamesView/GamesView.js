@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux'
 import ReactDOM from 'react-dom'
 import s from './GamesView.scss'
 import Dimensions from 'react-dimensions'
+import ReactToolTip from 'react-tooltip'
 
 const mapStateToProps = (state) => ({
   games: state.games,
@@ -107,16 +108,13 @@ export class GamesView extends React.Component {
     return (
       <div className={s.root}>
         <Header fixed={false} home route={this.props.route}/>
-        <div className={s.container}>
-          <div className={s.game}>
-            {this.renderGame()}
-          </div>
-        </div>
+        {this.renderAbout()}
+        {this.renderAd()}
         <div className={s.container}>
           <div>
+            {this.renderProfileTab()}
+            {this.renderColumns()}
             <div className={s.games}>
-              {this.renderProfileTab()}
-              {this.renderColumns()}
               {this.mapGames()}
             </div>
           </div>
@@ -126,15 +124,43 @@ export class GamesView extends React.Component {
     )
   }
 
+  renderAbout () {
+    return (
+      <div className={s.root444}>
+        <div className={s.container22}>
+          <span className={s.adtext}>{'Fantasy Pollster brings Daily Fantasy Sports to the US presidential election. It\'s simple: pick a game below, select which candidate you think will win, and, if you are correct, you will receive a cash prize.'}</span>
+        </div>
+      </div>
+    )
+  }
+
+  renderAd () {
+    return (
+      <div className={s.root4}>
+        <div className={s.container22}>
+          <span className={s.adtextgame}>{'GAMES'}</span>
+          <span className={s.adtext}>{'| Select a game to play'}</span>
+        </div>
+      </div>
+    )
+  }
+
   renderColumns () {
+    if (this.props.games.items.length === 0) {
+      return (
+        <div className={s.nogamesdiv}>
+          <span className={s.nogamestext}>Sorry, no games at the moment.</span>
+        </div>
+      )
+    }
     if (this.props.containerWidth < 580) {
       return (
         <div key={'hidadtop'} className={s.gamecdiv}>
-          <div className={s.partyDiv}>
-            <span className={s.gamec}>PARTY</span>
+          <div className={s.partyDivNoCircle}>
+            <span className={s.gamec}>GAME</span>
           </div>
           <div className={s.gameStuff}>
-            <span className={s.gamec}>STATE</span>
+            <span className={s.gamec}></span>
           </div>
           <div className={s.gameMoney2}>
             <span className={s.gamec}>WINNINGS</span>
@@ -147,24 +173,36 @@ export class GamesView extends React.Component {
     }
     return (
       <div key={'hidadtop'} className={s.gamecdiv}>
-        <div className={s.partyDiv}>
-          <span className={s.gamec}>PARTY</span>
+        <div className={s.partyDivNoCircle}>
+          <span className={s.gamec}>GAME</span>
         </div>
         <div className={s.gameStuff}>
-          <span className={s.gamec}>STATE</span>
+          <span className={s.gamec}></span>
         </div>
         <div className={s.timeDiv}>
-          <span className={s.gamec}>TIME REMAINING</span>
+          <span data-tip data-for='time' className={s.gamec}>TIME REMAINING</span>
         </div>
         <div className={s.gameSize}>
-          <span className={s.gamec}>GAME SIZE</span>
+          <span data-tip data-for='size' className={s.gamec}>GAME SIZE</span>
         </div>
         <div className={s.gameMoney2}>
-          <span className={s.gamec}>TOTAL WINNINGS</span>
+          <span data-tip data-for='winnings' className={s.gamec}>TOTAL WINNINGS</span>
         </div>
         <div className={s.gameMoney}>
-          <span className={s.gamec}>ENTRY</span>
+          <span data-tip data-for='entry' className={s.gamec}>ENTRY</span>
         </div>
+        <ReactToolTip id='time' place='left' type='info' effect='solid' multiline>
+          <span className={s.wintip}>The time remaining<br/> before each game close.</span>
+        </ReactToolTip>
+        <ReactToolTip id='size' place='left' type='info' effect='solid' multiline>
+          <span className={s.wintip}>The amount of players <br/> currently in each game.</span>
+        </ReactToolTip>
+        <ReactToolTip id='winnings' place='left' type='info' effect='solid' multiline>
+          <span className={s.wintip}>The total amount of money <br/> split between first place.</span>
+        </ReactToolTip>
+        <ReactToolTip id='entry' place='left' type='info' effect='solid' multiline>
+          <span className={s.wintip}>The cost of joining<br/> each game.</span>
+        </ReactToolTip>
       </div>
     )
   }
@@ -194,14 +232,6 @@ export class GamesView extends React.Component {
 
   renderProfileTab () {
     if (this.props.route.path === '/games') {
-      return (
-        <div className={s.title}>
-          <div className={s.gameStuff}>
-            <span className={s.gameName2}>Available Games</span>
-            <Link to='/games/mine'><span className={s.gameName3}>My Games</span></Link>
-          </div>
-        </div>
-      )
     } else {
       return (
         <Link to={'/games/'}>
@@ -244,6 +274,8 @@ export class GamesView extends React.Component {
   abr (text) {
     if (text === 'Democratic') {
       return 'D'
+    } if (text === 'Both') {
+      return 'B'
     }
     return 'R'
   }
@@ -260,6 +292,15 @@ export class GamesView extends React.Component {
     return { d: d, h: h, m: m, s: s }
   }
 
+  renderCircle (party) {
+    if (party === 'Democratic') {
+      return s.partyDivBlue
+    } else if (party === 'Both') {
+      return s.partyDivBlack
+    }
+    return s.partyDivRed
+  }
+
   mapGames () {
     return this.props.games.items.map(function (game, i, a) {
       var to = this.convertMS(Date.parse(game.closedate) - this.state.time)
@@ -273,8 +314,8 @@ export class GamesView extends React.Component {
           return (
             <Link key={'himom' + i} to={'/games/' + game._id}>
               <div key={'hidad' + i} className={s.gameRowBottom}>
-                <div className={s.partyDiv}>
-                  <span className={s.gameName}>{this.abr(game.party)}</span>
+                <div className={this.renderCircle(game.party)}>
+                  <span className={s.gameNameLight}>{this.abr(game.party)}</span>
                 </div>
                 <div className={s.gameStuff}>
                   <span className={s.gameName}>{game.statename}</span>
@@ -292,23 +333,23 @@ export class GamesView extends React.Component {
         return (
           <Link key={'himom' + i} to={'/games/' + game._id}>
             <div key={'hidad' + i} className={s.gameRowBottom}>
-              <div className={s.partyDiv}>
-                <span className={s.gameName}>{this.abr(game.party)}</span>
+              <div className={this.renderCircle(game.party)}>
+                <span className={s.gameNameLight}>{this.abr(game.party)}</span>
               </div>
               <div className={s.gameStuff}>
                 <span className={s.gameName}>{game.statename}</span>
               </div>
               <div className={s.timeDiv}>
-                <span className={s.gameName}>{n(to.d) + ':' + n(to.h) + ':' + n(to.m) + ':' + n(to.s)}</span>
+                <span className={s.gameNameLight}>{n(to.d) + ':' + n(to.h) + ':' + n(to.m) + ':' + n(to.s)}</span>
               </div>
               <div className={s.gameSize}>
-                <span className={s.gameName}>{game.entries + '/' + game.maxsize}</span>
+                <span className={s.gameNameLight}>{game.entries + '/' + game.maxsize}</span>
               </div>
               <div className={s.gameMoney2}>
-                <span className={s.gameName}>{'$' + game.reward}</span>
+                <span className={s.gameNameLight}>{'$' + game.reward}</span>
               </div>
               <div className={s.gameMoney}>
-                <span className={s.gameName}>{'$' + game.entry}</span>
+                <span className={s.gameNameLight}>{'$' + game.entry}</span>
               </div>
             </div>
           </Link>
@@ -318,17 +359,17 @@ export class GamesView extends React.Component {
           return (
             <Link key={'himom' + i} to={'/games/' + game._id}>
               <div key={'hidad' + i} className={s.gameRow}>
-                <div className={s.partyDiv}>
-                  <span className={s.gameName}>{this.abr(game.party)}</span>
+                <div className={this.renderCircle(game.party)}>
+                  <span className={s.gameNameLight}>{this.abr(game.party)}</span>
                 </div>
                 <div className={s.gameStuff}>
                   <span className={s.gameName}>{game.statename}</span>
                 </div>
                 <div className={s.gameMoney2}>
-                  <span className={s.gameName}>{'$' + game.reward}</span>
+                  <span className={s.gameNameLight}>{'$' + game.reward}</span>
                 </div>
                 <div className={s.gameMoney}>
-                  <span className={s.gameName}>{'$' + game.entry}</span>
+                  <span className={s.gameNameLight}>{'$' + game.entry}</span>
                 </div>
               </div>
             </Link>
@@ -337,23 +378,23 @@ export class GamesView extends React.Component {
         return (
           <Link key={'himom' + i} to={'/games/' + game._id}>
             <div key={'hidad' + i} className={s.gameRow}>
-              <div className={s.partyDiv}>
-                <span className={s.gameName}>{this.abr(game.party)}</span>
+              <div className={this.renderCircle(game.party)}>
+                <span className={s.gameNameLight}>{this.abr(game.party)}</span>
               </div>
               <div className={s.gameStuff}>
                 <span className={s.gameName}>{game.statename}</span>
               </div>
               <div className={s.timeDiv}>
-                <span className={s.gameName}>{n(to.d) + ':' + n(to.h) + ':' + n(to.m) + ':' + n(to.s)}</span>
+                <span className={s.gameNameLight}>{n(to.d) + ':' + n(to.h) + ':' + n(to.m) + ':' + n(to.s)}</span>
               </div>
               <div className={s.gameSize}>
-                <span className={s.gameName}>{game.entries + '/' + game.maxsize}</span>
+                <span className={s.gameNameLight}>{game.entries + '/' + game.maxsize}</span>
               </div>
               <div className={s.gameMoney2}>
-                <span className={s.gameName}>{'$' + game.reward}</span>
+                <span className={s.gameNameLight}>{'$' + game.reward}</span>
               </div>
               <div className={s.gameMoney}>
-                <span className={s.gameName}>{'$' + game.entry}</span>
+                <span className={s.gameNameLight}>{'$' + game.entry}</span>
               </div>
             </div>
           </Link>

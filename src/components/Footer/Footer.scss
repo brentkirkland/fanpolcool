@@ -1,6 +1,7 @@
 .root {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  background-color: rgb(248,248,248);
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .container {
@@ -33,16 +34,27 @@
     display:-moz-box;
     display:-ms-flexbox;
     display: flex;
-    flex-direction: column;
-    -webkit-flex-direction: column;
     align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
+    flex-direction: column;
   }
 
+  .element1, .element2 {
+    padding-bottom: 10px;
+    padding-right: 0;
+    font-size: .75em;
+    text-transform: uppercase;
+    color: black;
+  }
+
+  .paypal {
+    padding-top: 20px;
+  }
+  .element11 {
+    padding-top: 2px;
+  }
 }
 
-.element1, .element2 {
+.element1, .element11, .element2 {
   padding-right: 20px;
   font-size: .75em;
   text-transform: uppercase;
@@ -53,8 +65,46 @@
   cursor: pointer;
   font-weight: 600;
 }
+.element11 {
+  padding-top: 2px;
+}
 .element2 {
   padding-top: 2px;
+}
+
+.element3 {
+  padding-right: 20px;
+  font-size: .75em;
+  padding-top: 2px;
+  text-transform: uppercase;
+  color: black;
+  cursor: pointer;
+  font-weight: 600;
+  flex: 1;
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-webkit-flexbox;
+  display:-moz-flex;
+  display:-moz-box;
+  display:-ms-flexbox;
+  display: flex;
+}
+
+.paypal {
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-webkit-flexbox;
+  display:-moz-flex;
+  display:-moz-box;
+  display:-ms-flexbox;
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+
+}
+
+.element3:hover {
+  text-decoration: underline;
 }
 
 .element1:hover {
@@ -62,5 +112,10 @@
 }
 
 .element1:visited {
+  color: black;
+}
+
+
+.element3:visited {
   color: black;
 }

@@ -1,6 +1,8 @@
 /* @flow */
 import React from 'react'
 import s from './Privacy.scss'
+import Header from '../../components/Header/Header.js'
+import Footer from '../../components/Footer/Footer.js'
 // We can use Flow (http://flowtype.org/) to type our component's props
 // and state. For convenience we've included both regular propTypes and
 // Flow types, but if you want to try just using Flow you'll want to
@@ -14,9 +16,15 @@ import s from './Privacy.scss'
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 export class Privacy extends React.Component {
 
+  static propTypes = {
+    route: React.PropTypes.object.isRequired
+  };
+
   render () {
     return (
       <div className={s.root}>
+        <Header fixed={false} home route={this.props.route}/>
+        <div className={s.fakeunder}></div>
         <div className={s.container}>
           <span className={s.title}>Privacy Policy</span>
           <span className={s.effective}>Effective as of February 20, 2016</span>
@@ -54,6 +62,7 @@ export class Privacy extends React.Component {
           <span className={s.bold}>Contact us.</span>
           <span className={s.effective}>If you believe that any information we have is inaccurate or incomplete, or simply wish to contact us with questions about this Privacy Policy, please email us at support@fantasypollster.com </span>
         </div>
+        <Footer/>
       </div>
     )
   }

@@ -74,6 +74,16 @@ export class PayInOutView extends React.Component {
     if (localStorage.getItem('userToken') === null) {
       this.context.router.push('/games')
     }
+
+    this.timer = setTimeout(() => {
+      if (!this.props.profile.verified) {
+        this.context.router.push('/accept')
+      }
+    }, 2000)
+  }
+
+  componentWillUnmount () {
+    clearTimeout(this.timer)
   }
 
   whatToDarken (num) {
@@ -124,21 +134,26 @@ export class PayInOutView extends React.Component {
     }
   }
 
+  getUserId () {
+    console.log('user_id:', this.props.profile.profile.user_id)
+    return this.props.profile.profile.user_id
+  }
+
   handlePayPal () {
-    if (this.state.acceptable) {
+    if (this.state.acceptable && this.props.profile.profile.user_id !== '' && this.props.profile.profile.user_id !== null && this.props.profile.profile.user_id !== undefined) {
       return (
         <form action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_top'>
           <input type='hidden' name='cmd' value='_xclick'/>
           <input type='hidden' name='business' value='WR3V3DZ5JFR84'/>
           <input type='hidden' name='lc' value='US'/>
           <input type='hidden' name='item_name' value='Fantasy Pollster Points'/>
-          <input type='hidden' name='custom' value={this.props.profile.profile.user_id}/>
+          <input type='hidden' name='custom' value={this.getUserId()}/>
           <input type='hidden' name='button_subtype' value='services'/>
           <input type='hidden' name='no_note' value='1'/>
           <input type='hidden' name='no_shipping' value='1'/>
           <input type='hidden' name='rm' value='1'/>
           <input type='hidden' name='return' value={this.handleReturnValue()}/>
-          <input type='hidden' name='cancel_return' value='https://www.fantasypollster.com/points'/>
+          <input type='hidden' name='cancel_return' value='https://fantasypollster.com/points'/>
           <input type='hidden' name='currency_code' value='USD'/>
           <input type='hidden' name='amount' value={this.state.amount.toString()}/>
           <input type='hidden' name='bn' value='PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted'/>
@@ -156,10 +171,10 @@ export class PayInOutView extends React.Component {
       var address = this.props.router.locationBeforeTransitions.hash.split('state=')[1]
       if (this.props.profile.idToken !== null && this.props.profile.idToken !== '') {
         // this.context.router.push('/points#state=' + address)
-        return 'https://www.fantasypollster.com/games/' + address
+        return 'https://fantasypollster.com/games/' + address
       }
     }
-    return 'https://www.fantasypollster.com/games'
+    return 'https://fantasypollster.com/games'
   }
 
   render () {
@@ -205,7 +220,7 @@ export class PayInOutView extends React.Component {
         </div>
         <div className={s.container2}>
           <span className={s.title}>Pay Out</span>
-          <span className={s.information}>Refund points back to your PayPal account or via check.</span>
+          <span className={s.information}>Refund points back to your PayPal account or via check. Refunds may take up to 24 hours to send.</span>
           {this.renderCheckBox()}
           {this.renderInputs()}
           {this.renderSubmit()}

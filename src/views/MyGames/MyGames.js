@@ -3,7 +3,6 @@ import React from 'react'
 import Header from '../../components/Header/Header.js'
 import Footer from '../../components/Footer/Footer.js'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import { actions as gamesActions } from '../../redux/modules/games'
 import { actions as candidatesActions } from '../../redux/modules/candidates'
 import { actions as mygamesActions } from '../../redux/modules/mygames'
@@ -12,6 +11,7 @@ import { bindActionCreators } from 'redux'
 import ReactDOM from 'react-dom'
 import s from './MyGames.scss'
 import Dimensions from 'react-dimensions'
+import ReactToolTip from 'react-tooltip'
 
 const mapStateToProps = (state) => ({
   games: state.games,
@@ -62,33 +62,64 @@ export class MyGames extends React.Component {
 
   componentDidMount () {
     ReactDOM.findDOMNode(this).scrollIntoView()
-    if (localStorage.getItem('userToken') === null) {
-      this.context.router.push('/games')
-    }
     this.timer = setInterval(() => {
       this.setState({time: Date.now()})
     }, 1000)
+    this.timer2 = setTimeout(() => {
+      this.props.gamesActions.getMine()
+    }, 1000)
+  }
+
+  componentDidUpdate () {
+    if (this.props.candidates.items.length > 0 && this.props.games.mine.length === 0) {
+      this.props.gamesActions.getMine()
+    }
   }
 
   componentWillUnmount () {
     clearTimeout(this.timer)
+    clearTimeout(this.timer2)
+  }
+
+  renderAd () {
+    return (
+      <div className={s.root4}>
+        <div className={s.container22}>
+          <span className={s.adtextgame}>{'PORTFOLIO'}</span>
+          <span className={s.adtext}>{'| View your results (or mouse over --- to see remaining time)'}</span>
+        </div>
+      </div>
+    )
   }
 
   render () {
+    if (this.props.games.mine.length === 0) {
+      return (
+        <div className={s.root}>
+          <Header fixed={false} home route={this.props.route}/>
+          <div className={s.fakeunder}></div>
+          <div className={s.container}>
+            <div className={s.games}>
+              <div className={s.nogamesdiv}>
+                <span className={s.nogamestext}>You have not entered any games yet.</span>
+              </div>
+            </div>
+          </div>
+          <Footer/>
+        </div>
+      )
+    }
     return (
       <div className={s.root}>
         <Header fixed={false} home route={this.props.route}/>
         <div className={s.fakeunder}></div>
+        {this.renderAd()}
         <div className={s.container}>
-          <div className={s.title}>
-            <div className={s.gameStuff}>
-              <Link to='/games'><span className={s.gameName2}>Available Games</span></Link>
-              <span className={s.gameName3}>My Games</span>
-            </div>
-          </div>
           <div className={s.games}>
             <div className={s.candidatekey}>
-              <span className={s.candidateKeyTitle}>CANDIDATE</span>
+              <span className={s.candidateKeyTitle}>YOUR PICK</span>
+              <div className={s.fifty}/>
+              <span className={s.candidateKeyTitle}>WINNER</span>
               <div className={s.fifty}/>
               <span className={s.candidateTitleMPE}>STATE</span>
               <span className={s.candidateKeyScore}>EARNINGS</span>
@@ -109,14 +140,93 @@ export class MyGames extends React.Component {
       return this.props.games.mine.map(function (g, i) {
         var game = g.match
         var c = this.props.candidates.mappedItems.get(g.prediction)
-        var to = this.convertMS(Date.parse(game.checkdate) - this.state.time)
+        var p = Date.parse(game.checkdate)
+        var winner = false
+        var loser = false
+        var wid = game.winners[0]
+        var cw = this.props.candidates.mappedItems.get(wid)
+        if (g.match.entries < g.match.minsize) {
+          winner = false
+          loser = false
+        } else if (game.winners[0] === c._id) {
+          winner = true
+          loser = false
+        } else {
+          winner = false
+          loser = true
+        }
+        if (this.state.time >= p) {
+          if (winner) {
+            return (
+              <div key={'himom' + i} className={s.all}>
+                <div key={c.name} className={s.candidateBoxBottom}>
+                  <img src={c.img} className={s.candidateImage}/>
+                  <span className={s.candidateBoxTitle}>{c.name}</span>
+                  <img src={cw.img} className={s.candidateImage}/>
+                  <span className={s.candidateBoxTitle}>{cw.name}</span>
+                  <span className={s.candidateMoney}>{game.statename}</span>
+                  <div className={s.rightdivvy}>
+                    <span data-tip data-for={'winner' + i} className={s.win}>{'+ $' + (game.reward / game.winnercount).toFixed(2)}</span>
+                  </div>
+                </div>
+                <ReactToolTip id={'winner' + i} place='left' type='success' effect='solid' multiline>
+                  <span className={s.wintip}>A win! This money has been added<br/> back to your account balance.</span>
+                </ReactToolTip>
+              </div>
+            )
+          } else if (loser) {
+            return (
+              <div key={'himom' + i} className={s.all}>
+                <div key={c.name} className={s.candidateBoxBottom}>
+                  <img src={c.img} className={s.candidateImage}/>
+                  <span className={s.candidateBoxTitle}>{c.name}</span>
+                  <img src={cw.img} className={s.candidateImage}/>
+                  <span className={s.candidateBoxTitle}>{cw.name}</span>
+                  <span className={s.candidateMoney}>{game.statename}</span>
+                  <div className={s.rightdivvy}>
+                    <span data-tip data-for={'loser' + i} className={s.lose}>{'+ $ 0.00'}</span>
+                  </div>
+                </div>
+                <ReactToolTip id={'loser' + i} place='left' type='error' effect='solid' multiline>
+                  <span className={s.wintip}>Incorrect prediction. <br/>You made no money.</span>
+                </ReactToolTip>
+              </div>
+            )
+          } else {
+            return (
+              <div key={'himom' + i} className={s.all}>
+                <div key={c.name} className={s.candidateBoxBottom}>
+                  <img src={c.img} className={s.candidateImage}/>
+                  <span className={s.candidateBoxTitle}>{c.name}</span>
+                  <img src={cw.img} className={s.candidateImage}/>
+                  <span className={s.candidateBoxTitle}>{cw.name}</span>
+                  <span className={s.candidateMoney}>{game.statename}</span>
+                  <div className={s.rightdivvy}>
+                    <span data-tip data-for={'refund' + i} className={s.refund}>{'+ $' + g.match.entry.toFixed(2)}</span>
+                  </div>
+                </div>
+                <ReactToolTip id={'refund' + i} place='left' type='warning' effect='solid' multiline>
+                  <span className={s.wintip}>Game failed to fill. Entry fee has<br/>  been fully refunded.</span>
+                </ReactToolTip>
+              </div>
+            )
+          }
+        }
+        var to = this.convertMS(p - this.state.time)
         return (
           <div key={'himom' + i} className={s.all}>
             <div key={c.name} className={s.candidateBoxBottom}>
               <img src={c.img} className={s.candidateImage}/>
               <span className={s.candidateBoxTitle}>{c.name}</span>
+              <span data-tip data-for={'time' + i} className={s.candidateBoxTitleBlank}>---</span>
+              <div className={s.fakeimage}/>
               <span className={s.candidateMoney}>{game.statename}</span>
-              <span className={s.candidateScore}>{n(to.d) + ':' + n(to.h) + ':' + n(to.m) + ':' + n(to.s)}</span>
+              <div className={s.rightdivvy}>
+                <span data-tip data-for={'time' + i} className={s.candidateScore}>---</span>
+              </div>
+              <ReactToolTip id={'time' + i} place='left' type='dark' effect='solid' multiline>
+                <span className={s.wintip}>Results will be posted in:<br/>{n(to.d) + ':' + n(to.h) + ':' + n(to.m) + ':' + n(to.s)}</span>
+              </ReactToolTip>
             </div>
           </div>
         )

@@ -7,10 +7,7 @@
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;
   flex-direction: column;
-  padding-top: 200px;
-  min-height: -webkit-calc(100vh - 115px);
-  min-height:    -moz-calc(100vh - 115px);
-  min-height:         calc(100vh - 115px);
+  margin-top: 200px;
 }
 
 .weknow {
@@ -21,7 +18,7 @@
   font-weight: 300;
   padding-top: 20px;
   text-align: center;
-  padding-bottom: 300px;
+  padding-bottom: 500px;
 }
 
 

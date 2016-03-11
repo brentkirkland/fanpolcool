@@ -68,6 +68,14 @@ export class Navigation extends Component {
     if (Object.keys(this.props.profile.ga).length > 0) {
       this.props.profile.ga.pageview(this.props.router.locationBeforeTransitions.pathname + this.props.router.locationBeforeTransitions.hash)
     }
+
+    this.timer = setTimeout(() => {
+      this.props.profileActions.getProfile(this.props.profile)
+    }, 1500)
+  }
+
+  componentWillUnmount () {
+    clearTimeout(this.timer)
   }
 
   showLock () {
@@ -80,7 +88,7 @@ export class Navigation extends Component {
         icon: 'https://s3-us-west-2.amazonaws.com/static-assets-fanpol/sadcyclops.png',
         primaryColor: '#5c666f',
         socialBigButtons: true,
-        callbackURL: 'https://fantasypollster.com/games',
+        callbackURL: 'http://localhost:3000/games',
         responseType: 'token'})
     } else {
       localStorage.removeItem('userToken')
@@ -88,7 +96,7 @@ export class Navigation extends Component {
         icon: 'https://s3-us-west-2.amazonaws.com/static-assets-fanpol/sadcyclops.png',
         primaryColor: '#5c666f',
         socialBigButtons: true,
-        callbackURL: 'https://fantasypollster.com/games',
+        callbackURL: 'http://localhost:3000/games',
         responseType: 'token'})
     }
   }
@@ -135,14 +143,16 @@ export class Navigation extends Component {
         return (
           <div className={s.coverpage}>
             <Link className={s.linksmall} to='/games'>Games</Link>
-            <Link className={s.linksmall} to='/points'>{'Balance: ' + this.props.profile.balance + ' FPP'}</Link>
+            <Link className={s.linksmall} to='/games/mine'>Portfolio</Link>
+            <Link className={s.linksmall} to='/points'>{'Balance: $' + this.props.profile.balance.toFixed(2)}</Link>
             <span className={s.linksmall} onClick={this.logOut}>Logout</span>
           </div>
         )
       } else {
         <div className={s.coverpage}>
           <Link className={s.linksmall} to='/games'>Games</Link>
-          <Link className={s.linksmall} to='/points'>{'Balance: ' + this.props.profile.balance + ' FPP'}</Link>
+          <Link className={s.linksmall} to='/games/mine'>Portfolio</Link>
+          <Link className={s.linksmall} to='/points'>{'Balance: $' + this.props.profile.balance.toFixed(2)}</Link>
           <span className={s.linksmall} onClick={this.logOut}>Logout</span>
         </div>
       }
@@ -151,7 +161,7 @@ export class Navigation extends Component {
           <Link className={s.linksmall} to='/games'>Games</Link>
           <span className={s.linksmall}>Loading profile</span>
           <Link className={s.linksmall} to='/points'>Balance: </Link>
-          <Link className={s.linksmall} to='/points'>{'Balance: ' + this.props.profile.balance + ' FPP'}</Link>
+          <Link className={s.linksmall} to='/points'>{'Balance: $' + this.props.profile.balance.toFixed(2)}</Link>
           <span className={s.linksmall} onClick={this.logOut}>Logout</span>
         </div>
       )
@@ -159,7 +169,7 @@ export class Navigation extends Component {
   }
 
   render () {
-    if (this.props.containerWidth < 580) {
+    if (this.props.containerWidth < 692) {
       return (
         <div className={s.root2} role='navigation'>
           <div className={s.r} onClick={this.handleDropDown}>
@@ -181,7 +191,8 @@ export class Navigation extends Component {
       return (
         <div className={s.root} role='navigation'>
           <Link className={s.link} to='/games'>Games</Link>
-          <Link className={s.link} to='/points'>{'Balance: ' + this.props.profile.balance + ' FPP'}</Link>
+          <Link className={s.link} to='/games/mine'>Portfolio</Link>
+          <Link className={s.link} to='/points'>{'Balance: $' + this.props.profile.balance.toFixed(2)}</Link>
           <span className={s.link} onClick={this.logOut}>Logout</span>
         </div>
       )
@@ -189,9 +200,10 @@ export class Navigation extends Component {
       return (
         <div className={s.root} role='navigation'>
           <Link className={s.link} to='/games'>Games</Link>
+          <Link className={s.link} to='/games/mine'>Portfolio</Link>
           <span className={s.link}>Loading profile</span>
           <Link className={s.link} to='/points'>Balance: </Link>
-          <Link className={s.link} to='/points'>{'Balance: ' + this.props.profile.balance + ' FPP'}</Link>
+          <Link className={s.link} to='/points'>{'Balance: $' + this.props.profile.balance.toFixed(2)}</Link>
           <span className={s.link} onClick={this.logOut}>Logout</span>
         </div>
       )

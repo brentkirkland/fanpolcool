@@ -36,6 +36,8 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding-bottom: 40px;
+  height: 85vh;
 }
 
 .floatingdiv {
@@ -196,6 +198,7 @@ a { text-decoration: none; }
 .title2 {
   font-size: 1.75em;
   font-weight: 600;
+  padding-bottom: 5px;
 }
 
 .slogan {

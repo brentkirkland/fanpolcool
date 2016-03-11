@@ -11,12 +11,14 @@ import { bindActionCreators } from 'redux'
 import ReactDOM from 'react-dom'
 import s from './GameView.scss'
 import Dimensions from 'react-dimensions'
+import ReactToolTip from 'react-tooltip'
 
 const mapStateToProps = (state) => ({
   games: state.games,
   mygames: state.mygames,
   profile: state.profile,
-  candidates: state.candidates
+  candidates: state.candidates,
+  router: state.router
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -48,6 +50,7 @@ export class GameView extends React.Component {
   static propTypes = {
     containerWidth: React.PropTypes.number.isRequired,
     games: React.PropTypes.object.isRequired,
+    router: React.PropTypes.object.isRequired,
     mygames: React.PropTypes.object.isRequired,
     profile: React.PropTypes.object.isRequired,
     gamesActions: React.PropTypes.object.isRequired,
@@ -136,6 +139,7 @@ export class GameView extends React.Component {
         <div className={s.root}>
           <Header fixed={false} home route={this.props.route}/>
           <div className={s.fakeunder}></div>
+          {this.renderAd()}
           {this.renderSelectedGame()}
           <div className={s.container}>
             <div className={s.game}>
@@ -143,36 +147,156 @@ export class GameView extends React.Component {
             </div>
           </div>
           {this.renderSelectComponent()}
-          <div className={s.container}>
-            <div>
-              <div className={s.games}>
-                {this.renderProfileTab()}
-                {this.mapGames()}
-              </div>
-            </div>
-          </div>
+
           <Footer/>
         </div>
       )
     }
   }
 
+  renderAd () {
+    var game = this.props.games.mappedItems.get(this.props.routeParams.id)
+    if (this.props.router.locationBeforeTransitions.hash === '#social') {
+      if (game.party === 'Republican') {
+        return (
+          <div className={s.root4r}>
+            <div className={s.container23}>
+              <span className={s.adtext}>{'WIN UP TO $' + game.reward}</span>
+              <span className={s.adtext2}>{'after entering this game for $' + game.entry + '.'}</span>
+            </div>
+          </div>
+        )
+      } else if (game.party === 'Both') {
+        return (
+          <div className={s.root4b}>
+            <div className={s.container23}>
+              <span className={s.adtext}>{'WIN UP TO $' + game.reward}</span>
+              <span className={s.adtext2}>{'after entering this game for $' + game.entry + '.'}</span>
+            </div>
+          </div>
+        )
+      } else {
+        return (
+          <div className={s.root4d}>
+            <div className={s.container23}>
+              <span className={s.adtext}>{'WIN UP TO $' + game.reward}</span>
+              <span className={s.adtext2}>{'after entering this game for $' + game.entry + '.'}</span>
+            </div>
+          </div>
+        )
+      }
+    } else {
+      if (this.state.submit) {
+        return (
+          <div className={s.root44}>
+            <div className={s.container22}>
+              <span className={s.gamenametop}>{game.name}</span>
+              <div>
+                <span className={s.adtext3O}>{this.handleMobile()}</span>
+                <span className={s.adtext3O}>{'2. Enter'}</span>
+                <span className={s.adtext3}>{'3. Confirm'}</span>
+              </div>
+            </div>
+          </div>
+        )
+      } else if (this.state.candidate !== '') {
+        return (
+          <div className={s.root44}>
+            <div className={s.container22}>
+              <span className={s.gamenametop}>{game.name}</span>
+              <div>
+                <span className={s.adtext3O}>{this.handleMobile()}</span>
+                <span className={s.adtext3}>{'2. Enter'}</span>
+                <span className={s.adtext3O}>{'3. Confirm'}</span>
+              </div>
+            </div>
+          </div>
+        )
+      } else {
+        return (
+          <div className={s.root44}>
+            <div className={s.container22}>
+              <span className={s.gamenametop}>{game.name}</span>
+              <div>
+                <span className={s.adtext3}>{this.handleMobile()}</span>
+                <span className={s.adtext3O}>{'2. Enter'}</span>
+                <span className={s.adtext3O}>{'3. Confirm'}</span>
+              </div>
+            </div>
+          </div>
+        )
+      }
+    }
+  }
+
+  handleMobile () {
+    if (this.props.containerWidth < 580) {
+      return '1. Predict a candidate'
+    } else {
+      return '| 1. Predict a candidate'
+    }
+  }
+
+  renderStats (state) {
+    if (state === 'General Election') {
+      return 'state'
+    } else {
+      return 'precinct'
+    }
+  }
+
   renderSelectComponent () {
     if (this.props.route.path !== '/games') {
+      var state = this.props.games.mappedItems.get(this.props.routeParams.id).statename
       return (
         <div className={s.root3}>
           <div className={s.container3}>
             <div className={s.candidatekey}>
               <span className={s.candidateKeyTitle}>CANDIDATE</span>
               <div className={s.fifty}/>
-              <span className={s.candidateTitleMPE}>{this.handleLengthString()}</span>
-              <span className={s.candidateKeyScore}>{this.handlePercentageLength()}</span>
+              <span data-tip data-for='earnings' className={s.candidateTitleMPE}>{this.handleLengthString()}</span>
+              <span data-tip data-for='percent' className={s.candidateKeyScore}>{this.handlePercentageLength()}</span>
             </div>
+            <ReactToolTip id='earnings' place='left' type='info' effect='solid' multiline>
+              <span className={s.wintip}>The max amount of money you can <br/>currently win for each candidate.</span>
+            </ReactToolTip>
+            <ReactToolTip id='percent' place='left' type='info' effect='solid' multiline>
+              <span className={s.wintip}>The percentage of people who <br/>  have picked each candidate.</span>
+            </ReactToolTip>
             {this.mapCandidates()}
           </div>
-          <div className={s.container4}>
-            <span className={s.gameOutcome}>{'The outcome is determined by the accumulated results of the polls taken in each individual precinct of ' + this.props.games.mappedItems.get(this.props.routeParams.id).statename + '. Results will be posted after each precinct of ' + this.props.games.mappedItems.get(this.props.routeParams.id).statename + ' has accounted every vote.'}</span>
+          <div className={s.container44}>
+            <span className={s.gameTitle}>How it Works</span>
           </div>
+          <div className={s.container4}>
+            <span className={s.gameOutcomeBold}>How is a win determined?</span>
+            <span className={s.gameOutcome}>{'The outcome is determined by the accumulated results of the polls taken in each individual ' + this.renderStats(state) + ' of ' + this.renderWho(state) + '. Results will be posted after each ' + this.renderStats(state) + ' of ' + this.renderWho(state) + ' has accounted every vote.'}</span>
+          </div>
+          <div className={s.container4}>
+            <span className={s.gameOutcomeBold}>{'What is Max Earnings?'}</span>
+            <span className={s.gameOutcome}>{'Max Earnings represents the current maximum that one can possibly earn from choosing a given candidate. This metric changes based on the Percentage of each candidate.'}</span>
+          </div>
+          <div className={s.container4}>
+            <span className={s.gameOutcomeBold}>{'What is Percentage?'}</span>
+            <span className={s.gameOutcome}>{'Percentage is the proportion of players in this game who have chosen a given candidate.'}</span>
+          </div>
+          <div className={s.container4}>
+            <span className={s.gameOutcomeBold}>{'What is Total Winnings?'}</span>
+            <span className={s.gameOutcome}>{'Total Winnings is the grand prize. It is split between the players who make the correct prediction.'}</span>
+          </div>
+          <div className={s.container4}>
+            <span className={s.gameOutcomeBold}>What happens if a game does not fill?</span>
+            <span className={s.gameOutcome}>{'If a game does not fill, your entry fee of $'+ this.props.games.mappedItems.get(this.props.routeParams.id).entry + ' will be refunded.'}</span>
+          </div>
+          <div className={s.container4}>
+            <span className={s.gameOutcomeBold}>What happens if everyone picks the same candidate?</span>
+            <span className={s.gameOutcome}>{'We will add an additional $'+ this.props.games.mappedItems.get(this.props.routeParams.id).entry + ' to the total winnings. That way you recieve your entry fee back and don\'t lose money.'}</span>
+          </div>
+          <div className={s.container4}>
+            <span className={s.gameOutcomeBold}>When do you charge me for entry?</span>
+            <span className={s.gameOutcome}>{'You will be charged for entry after you submit.'}</span>
+          </div>
+
         </div>
       )
     }
@@ -207,19 +331,19 @@ export class GameView extends React.Component {
           id = c._id
           if (this.state.candidate === name) {
             return (
-              <div key={c.name + 'dark'} className={s.candidateBoxBottomDark} onClick={this.handleChoice.bind(this, name, id)}>
+              <div key={c.name + 'dark'} className={s.candidateBoxDark} onClick={this.handleChoice.bind(this, name, id)}>
                 <img src={c.img} className={s.candidateImage}/>
                 <span className={s.candidateBoxTitle}>{c.name}</span>
-                <span className={s.candidateMoney}>{'$' + this.handleMPE(id)}</span>
+                <span className={s.candidateMoney}>{'$' + this.handleMPE(id).toFixed(2)}</span>
                 <span className={s.candidateScore}>{this.handleStats(id) + '%'}</span>
               </div>
             )
           }
           return (
-            <div key={c.name} className={s.candidateBoxBottom} onClick={this.handleChoice.bind(this, name, id)}>
+            <div key={c.name} className={s.candidateBox} onClick={this.handleChoice.bind(this, name, id)}>
               <img src={c.img} className={s.candidateImage}/>
               <span className={s.candidateBoxTitle}>{c.name}</span>
-              <span className={s.candidateMoney}>{'$' + this.handleMPE(id)}</span>
+              <span className={s.candidateMoney}>{'$' + this.handleMPE(id).toFixed(2)}</span>
               <span className={s.candidateScore}>{this.handleStats(id) + '%'}</span>
             </div>
           )
@@ -231,7 +355,7 @@ export class GameView extends React.Component {
             <div key={c.name + 'dark'} className={s.candidateBoxDark} onClick={this.handleChoice.bind(this, name, id)}>
               <img src={c.img} className={s.candidateImage}/>
               <span className={s.candidateBoxTitle}>{c.name}</span>
-              <span className={s.candidateMoney}>{'$' + this.handleMPE(id)}</span>
+              <span className={s.candidateMoney}>{'$' + this.handleMPE(id).toFixed(2)}</span>
               <span className={s.candidateScore}>{this.handleStats(id) + '%'}</span>
             </div>
           )
@@ -240,7 +364,7 @@ export class GameView extends React.Component {
           <div key={c.name} className={s.candidateBox} onClick={this.handleChoice.bind(this, name, id)}>
             <img src={c.img} className={s.candidateImage}/>
             <span className={s.candidateBoxTitle}>{c.name}</span>
-            <span className={s.candidateMoney}>{'$' + this.handleMPE(id)}</span>
+            <span className={s.candidateMoney}>{'$' + this.handleMPE(id).toFixed(2)}</span>
             <span className={s.candidateScore}>{this.handleStats(id) + '%'}</span>
           </div>
         )
@@ -308,56 +432,18 @@ export class GameView extends React.Component {
       var game = this.props.games.mappedItems.get(this.props.routeParams.id)
       if (game) {
         var to = this.convertMS(Date.parse(game.closedate) - this.state.time)
-        if (this.props.containerWidth < 580) {
-          return (
-            <div className={s.gameRowColor2}>
-              <div className={s.container2}>
-                <div className={s.partyDiv}>
-                  <span className={s.gameUnderText}>PARTY</span>
-                  <span className={s.gameName}>{game.party.charAt(0)}</span>
-                </div>
-                <div className={s.gameStuff}>
-                  <span className={s.gameUnderText}>STATE</span>
-                  <span className={s.gameName}>{game.statename}</span>
-                </div>
-                <div className={s.gameMoney2}>
-                  <span className={s.gameUnderText}>WINNINGS</span>
-                  <span className={s.gameName}>{'$' + game.reward}</span>
-                </div>
-                <div className={s.gameMoney}>
-                  <span className={s.gameUnderText}>ENTRY</span>
-                  <span className={s.gameName}>{'$' + game.entry}</span>
-                </div>
-              </div>
-            </div>
-          )
-        }
         return (
           <div className={s.gameRowColor2}>
             <div className={s.container2}>
-              <div className={s.partyDiv}>
-                <span className={s.gameUnderText}>PARTY</span>
-                <span className={s.gameName}>{game.party.charAt(0)}</span>
-              </div>
-              <div className={s.gameStuff}>
-                <span className={s.gameUnderText}>STATE</span>
-                <span className={s.gameName}>{game.name}</span>
-              </div>
-              <div className={s.timeDiv}>
-                <span className={s.gameUnderText}>TIME REMAINING</span>
-                <span className={s.gameName}>{n(to.d) + ':' + n(to.h) + ':' + n(to.m) + ':' + n(to.s)}</span>
-              </div>
-              <div className={s.gameSize}>
-                <span className={s.gameUnderText}>GAME SIZE</span>
-                <span className={s.gameName}>{this.handleSize(game.entries) + ' / ' + game.maxsize}</span>
-              </div>
-              <div className={s.gameMoney2}>
-                <span className={s.gameUnderText}>TOTAL WINNINGS</span>
-                <span className={s.gameName}>{'$' + game.reward}</span>
-              </div>
-              <div className={s.gameMoney}>
-                <span className={s.gameUnderText}>ENTRY</span>
-                <span className={s.gameName}>{'$' + game.entry}</span>
+              <div className={s.gameinfobottom}>
+                <div className={s.timeDiv}>
+                  <span className={s.gameUnderText}>Time Remaining</span>
+                  <span className={s.gameName}>{n(to.d) + ':' + n(to.h) + ':' + n(to.m) + ':' + n(to.s)}</span>
+                </div>
+                <div className={s.gameSize}>
+                  <span className={s.gameUnderText}>Game Size</span>
+                  <span className={s.gameName}>{(game.maxsize - this.handleSize(game.entries)) + ' Remaining Slots'}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -394,6 +480,14 @@ export class GameView extends React.Component {
     }
   }
 
+  renderWho (state) {
+    if (state === 'General Election') {
+      return 'the General Election'
+    } else {
+      return state
+    }
+  }
+
   renderGame () {
     // no game selected
     if (this.props.route.path === '/games') {
@@ -403,9 +497,14 @@ export class GameView extends React.Component {
         return (
           <div className={s.gameDiv}>
             <div className={s.top3}>
-              <span className={s.gameTitle}>{'Who will win ' + this.props.games.mappedItems.get(this.props.routeParams.id).statename + '?'}</span>
+              <div className={s.gametitlediv}>
+                <span className={s.gameTitle}>{'Who will win ' + this.renderWho(this.props.games.mappedItems.get(this.props.routeParams.id).statename) + '?'}</span>
+              </div>
               <div className={s.submitOpac}>
-                <span className={s.submitText}>{'SUBMIT'}</span>
+                <span className={s.submitText}>{'ENTER'}</span>
+              </div>
+              <div className={s.submitOpacW}>
+                <span className={s.submitText}>{'$1'}</span>
               </div>
             </div>
           </div>
@@ -415,11 +514,12 @@ export class GameView extends React.Component {
         return (
           <div className={s.gameDiv}>
             <div className={s.top3}>
-              <span className={s.gameTitle}><b>{this.state.candidate}</b>{' will win ' + this.props.games.mappedItems.get(this.props.routeParams.id).statename + '.'}</span>
-              <div>
-                <div className={s.submitConfirm} onClick={this.actuallySubmit}>
-                  <span className={s.submitText}>{'CONFIRM'}</span>
-                </div>
+              <span className={s.gameTitle}><b>{this.state.candidate}</b>{' will win ' + this.renderWho(this.props.games.mappedItems.get(this.props.routeParams.id).statename) + '.'}</span>
+              <div className={s.submitConfirm} onClick={this.actuallySubmit}>
+                <span className={s.submitText}>{'CONFIRM'}</span>
+              </div>
+              <div className={s.submitConfirmW} onClick={this.actuallySubmit}>
+                <span className={s.submitText}>{'$1'}</span>
               </div>
             </div>
           </div>
@@ -430,7 +530,10 @@ export class GameView extends React.Component {
           <div className={s.top3}>
             <span className={s.gameTitle}><b>{this.state.candidate}</b>{' will win ' + this.props.games.mappedItems.get(this.props.routeParams.id).statename + '.'}</span>
             <div className={s.submit} onClick={this.handleSubmit}>
-              <span className={s.submitText}>{'SUBMIT'}</span>
+              <span className={s.submitText}>{'ENTER'}</span>
+            </div>
+            <div className={s.submitW} onClick={this.handleSubmit}>
+              <span className={s.submitText}>{'$1'}</span>
             </div>
           </div>
         </div>
@@ -473,8 +576,10 @@ export class GameView extends React.Component {
   abr (text) {
     if (text === 'Democratic') {
       return 'D'
+    } else if (text === 'Republican') {
+      return 'DRED'
     }
-    return 'R'
+    return 'DRED'
   }
 
   convertMS (ms) {

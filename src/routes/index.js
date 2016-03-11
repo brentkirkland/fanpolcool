@@ -15,13 +15,16 @@ import AcceptView from 'views/AcceptView/AcceptView'
 import PayInOutView from 'views/PayInOutView/PayInOutView'
 import Terms from 'views/Terms/Terms'
 import Contact from 'views/Contact/Contact'
+import OpenData from 'views/OpenData/OpenData'
 import Privacy from 'views/Privacy/Privacy'
 import Hello from 'views/Hello/Hello'
+import Legal from 'views/Legal/Legal'
 
 export default (store) => (
   <Route path='/' component={CoreLayout}>
     <IndexRoute component={HomeView} />
     <Route path='/contact' component={Contact} />
+    <Route path='/data' component={OpenData} />
     <Route path='/games' component={GamesView} />
     <Route path='/games/mine' component={MyGames} />
     <Route path='/games/:id' component={GameView} />
@@ -30,6 +33,7 @@ export default (store) => (
     <Route path='/terms' component={Terms} />
     <Route path='/accept' component={AcceptView} />
     <Route path='/privacy' component={Privacy} />
-    <Redirect from='*' to='/hello' />
+    <Route path='/legal' component={Legal} />
+    <Redirect from='*' to='/games' />
   </Route>
 )

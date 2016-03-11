@@ -7,6 +7,52 @@
   height: 55px;
 }
 
+.root4 {
+  background-color: rgb(248,248,248);
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.container22 {
+  margin: 0 auto;
+  max-width: 930px;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  height: 65px;
+  color:  #1a1a1a;
+}
+
+.adtext {
+  letter-spacing: 1px;
+  font-size: 1em;
+  text-align: left;
+  flex: 1;
+}
+
+.adtextsidenote {
+  letter-spacing: 1px;
+  font-size: 1em;
+  font-weight: 300;
+  text-align: left;
+  flex: 1;
+}
+
+.adtextgame {
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 1em;
+  text-align: left;
+  margin-right: 10px;
+}
+
 .container {
   margin: 0 auto;
   max-width: 930px;
@@ -16,6 +62,29 @@
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;
   flex-direction: column;
+  min-height: -webkit-calc(100vh - 115px);
+  min-height:    -moz-calc(100vh - 115px);
+  min-height:         calc(100vh - 115px);
+}
+
+.nogamesdiv {
+  padding-top: 200px;
+  padding-bottom: 300px;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  max-width: 400px;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
+
+.nogamestext {
+  text-align: center;
+  font-size: 1.25em;
+  font-weight: 600;
 }
 
 .title {
@@ -45,7 +114,7 @@
 
 .gameName2 {
   font-weight: 300;
-  font-size: 1.5em;
+  font-size: 1.25em;
   padding-right: 20px;
   opacity: 0.5;
   cursor: pointer;
@@ -54,9 +123,12 @@
 
 .gameName3 {
   font-weight: 300;
-  font-size: 1.5em;
+  font-size: 1.25em;
   cursor: pointer;
   color: black;
+  border-bottom-color: black;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
 }
 
 .gameName2:hover {
@@ -78,9 +150,9 @@
   padding-right: 10px;
   padding-top: 18px;
   padding-bottom: 18px;
-  border-bottom-width: 1px;
-  border-bottom-color: #e5e6e6;
-  border-bottom-style: solid;
+  border-top-width: 1px;
+  border-top-color: #e5e6e6;
+  border-top-style: solid;
   display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
   display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
   display: -ms-flexbox;      /* TWEENER - IE 10 */
@@ -188,40 +260,97 @@
 }
 
 .candidateImage {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%
 }
 
 .all {
-  border-bottom-width: 1px;
-  border-bottom-color: #e5e6e6;
-  border-bottom-style: solid;
+  border-top-width: 1px;
+  border-top-color: #e5e6e6;
+  border-top-style: solid;
 }
 
 .candidateBoxTitle {
-  padding: 10px;
-  font-size: 1.25em;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 1em;
   font-weight: 600;
   text-align: left;
-  flex: 1;
+  flex: 0.7;
 }
+
+.candidateBoxTitleBlank {
+  font-weight: 300;
+  padding-right: 20px;
+  font-size: 1em;
+  text-align: left;
+  flex: 0.7;
+}
+
+
 
 .candidateMoney {
   padding-right: 10px;
-  font-size: 1.25em;
+  font-size: 1em;
   font-weight: 300;
   flex: 0.3;
   min-width: 75px;
 }
 
 .candidateScore {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 1.25em;
+  font-size: 1em;
   text-align: right;
   font-weight: 300;
+}
+
+.rightdivvy {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
   flex: 0.3;
+  justify-content: flex-end;
+}
+
+.win {
+  font-size: 1em;
+  text-align: right;
+  color: green;
+  cursor: pointer;
+}
+
+.wintip {
+
+}
+
+.lose {
+  font-size: 1em;
+  text-align: right;
+  color: red;
+  cursor: pointer;
+}
+
+.refund {
+  font-size: 1em;
+  text-align: right;
+  color: #ffcc00;
+  cursor: pointer;
+}
+
+.plus {
+  color: green;
+}
+
+.minus {
+  color: red;
+}
+
+.tie {
+  color: #ffcc00;
 }
 
 .candidatekey {
@@ -242,11 +371,16 @@
 .candidateKeyTitle {
   font-size: .75em;
   text-align: left;
-  flex: 1;
+  flex: .7;
 }
 
 .fifty {
-  width: 70px;
+  width: 60px;
+}
+
+.fakeimage {
+  width: 40px;
+  height: 40px;
 }
 
 .candidateTitleMPE {
@@ -267,35 +401,41 @@
 
 @media screen and (max-width: 580px) {
   .candidateMoney {
-    padding-top: 10px;
-    padding-bottom: 10px;
     padding-right: 10px;
-    font-size: 1em;
+    font-size: .75em;
     font-weight: 300;
     flex: 0.4;
     min-width: 75px;
   }
 
   .candidateScore {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 1em;
+    font-size: .75em;
     text-align: right;
     font-weight: 300;
-    flex: 0.4;
   }
 
   .candidateBoxTitle {
-    padding: 10px;
-    font-size: 1em;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: .75em;
     font-weight: 600;
     text-align: left;
-    flex: 1;
+    flex: 0.7;
   }
 
+  .candidateBoxTitleBlank {
+    padding-right: 20px;
+    font-size: 0.75em;
+    text-align: left;
+    font-weight: 300;
+    flex: 0.7;
+    cursor: pointer;
+  }
+
+
   .candidateImage {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%
   }
 
@@ -312,7 +452,7 @@
   }
 
   .candidateTitleMPE {
-    font-size: .75em;
+    font-size: .5em;
     text-align: left;
     padding-right: 10px;
     flex: 0.4;
@@ -322,8 +462,58 @@
   .candidateKeyScore {
     padding-top: 10px;
     padding-bottom: 10px;
-    font-size: .75em;
+    font-size: .5em;
     text-align: right;
     flex: 0.4;
+  }
+  .rightdivvy {
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;
+    flex: 0.4;
+    justify-content: flex-end;
+  }
+
+  .candidateKeyTitle {
+    font-size: .5em;
+    text-align: left;
+    flex: .7;
+  }
+
+  .win {
+    font-size: .75em;
+    text-align: right;
+    color: green;
+    cursor: pointer;
+  }
+
+  .lose {
+    font-size: .75em;
+    text-align: right;
+    color: red;
+    cursor: pointer;
+  }
+
+  .fakeimage {
+    width: 30px;
+    height: 30px;
+  }
+
+  .refund {
+    font-size: .75em;
+    text-align: right;
+    color: #ffcc00;
+    cursor: pointer;
+  }
+
+  .container22 {
+    flex-direction: column;
+  }
+
+  .adtext {
+    font-size: .75em;
+    text-align: center;
   }
 }

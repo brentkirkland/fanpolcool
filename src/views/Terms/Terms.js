@@ -1,6 +1,8 @@
 /* @flow */
 import React from 'react'
 import s from './Terms.scss'
+import Header from '../../components/Header/Header.js'
+import Footer from '../../components/Footer/Footer.js'
 // We can use Flow (http://flowtype.org/) to type our component's props
 // and state. For convenience we've included both regular propTypes and
 // Flow types, but if you want to try just using Flow you'll want to
@@ -14,9 +16,15 @@ import s from './Terms.scss'
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 export class Terms extends React.Component {
 
+  static propTypes = {
+    route: React.PropTypes.object.isRequired
+  };
+
   render () {
     return (
       <div className={s.root}>
+        <Header fixed={false} home route={this.props.route}/>
+        <div className={s.fakeunder}></div>
         <div className={s.container}>
           <span className={s.title}>Terms of Use</span>
           <span className={s.effective}>Effective as of February 20, 2016</span>
@@ -64,6 +72,7 @@ export class Terms extends React.Component {
           <span className={s.letter}><b>(d) &emsp; Entire Agreement.</b> This Agreement constitutes the full, final, and complete agreement between the parties.</span>
           <span className={s.letter}><b>(e) &emsp; Contact Us: </b>You may contact the Company at support@fantasypollster.com</span>
         </div>
+        <Footer/>
       </div>
     )
   }
