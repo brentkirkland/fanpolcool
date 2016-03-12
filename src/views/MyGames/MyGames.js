@@ -3,6 +3,7 @@ import React from 'react'
 import Header from '../../components/Header/Header.js'
 import Footer from '../../components/Footer/Footer.js'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import { actions as gamesActions } from '../../redux/modules/games'
 import { actions as candidatesActions } from '../../redux/modules/candidates'
 import { actions as mygamesActions } from '../../redux/modules/mygames'
@@ -85,7 +86,8 @@ export class MyGames extends React.Component {
     return (
       <div className={s.root4}>
         <div className={s.container22}>
-          <span className={s.adtextgame}>{'PORTFOLIO'}</span>
+          <Link to='/games'><span className={s.adtextgamegame}>{'GAMES'}</span></Link>
+          <span className={s.adtextgame}>{' > PORTFOLIO'}</span>
           <span className={s.adtext}>{'| View your results (or mouse over --- to see remaining time)'}</span>
         </div>
       </div>

@@ -3,6 +3,7 @@ import React from 'react'
 import s from './Terms.scss'
 import Header from '../../components/Header/Header.js'
 import Footer from '../../components/Footer/Footer.js'
+import ReactDOM from 'react-dom'
 // We can use Flow (http://flowtype.org/) to type our component's props
 // and state. For convenience we've included both regular propTypes and
 // Flow types, but if you want to try just using Flow you'll want to
@@ -19,6 +20,10 @@ export class Terms extends React.Component {
   static propTypes = {
     route: React.PropTypes.object.isRequired
   };
+
+  componentDidMount () {
+    ReactDOM.findDOMNode(this).scrollIntoView()
+  }
 
   render () {
     return (

@@ -209,10 +209,11 @@
 
 .root3 {
   background-color: rgb(255,255,255);
-  min-height: -webkit-calc(100vh - 35vh);
-  min-height:    -moz-calc(100vh - 35vh);
-  min-height:         calc(100vh - 35vh);
+  min-height: -webkit-calc(100vh - 55vh);
+  min-height:    -moz-calc(100vh - 55vh);
+  min-height:         calc(100vh - 55vh);
   color: #1a1a1a;
+  padding-bottom: 20px;
 }
 
 .root4 {
