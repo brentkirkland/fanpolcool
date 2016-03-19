@@ -139,6 +139,7 @@ export class GameView extends React.Component {
         <div className={s.root}>
           <Header fixed={false} home route={this.props.route}/>
           <div className={s.fakeunder}></div>
+          {this.renderDonation()}
           {this.renderAd()}
           {this.renderSelectedGame()}
           <div className={s.container}>
@@ -152,6 +153,16 @@ export class GameView extends React.Component {
         </div>
       )
     }
+  }
+
+  renderDonation () {
+    return (
+      <div className={s.root44}>
+        <div className={s.container22}>
+          <span className={s.gamenametop}>100% of this month's profit will go to: Red Cross</span>
+        </div>
+      </div>
+    )
   }
 
   renderAd () {
@@ -489,7 +500,7 @@ export class GameView extends React.Component {
   }
 
   renderGame () {
-    // no game selected
+    var game = this.props.games.mappedItems.get(this.props.routeParams.id)
     if (this.props.route.path === '/games') {
       return
     } else {
@@ -504,7 +515,7 @@ export class GameView extends React.Component {
                 <span className={s.submitText}>{'ENTER'}</span>
               </div>
               <div className={s.submitOpacW}>
-                <span className={s.submitText}>{'$1'}</span>
+                <span className={s.submitText}>{'$' + game.entry}</span>
               </div>
             </div>
           </div>
@@ -519,7 +530,7 @@ export class GameView extends React.Component {
                 <span className={s.submitText}>{'CONFIRM'}</span>
               </div>
               <div className={s.submitConfirmW} onClick={this.actuallySubmit}>
-                <span className={s.submitText}>{'$1'}</span>
+                <span className={s.submitText}>{'$' + game.entry}</span>
               </div>
             </div>
           </div>
@@ -533,7 +544,7 @@ export class GameView extends React.Component {
               <span className={s.submitText}>{'ENTER'}</span>
             </div>
             <div className={s.submitW} onClick={this.handleSubmit}>
-              <span className={s.submitText}>{'$1'}</span>
+              <span className={s.submitText}>{'$' + game.entry}</span>
             </div>
           </div>
         </div>

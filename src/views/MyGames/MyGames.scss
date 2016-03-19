@@ -13,6 +13,11 @@
   margin-bottom: 10px;
 }
 
+.root44 {
+  background-color: #9966ff;
+  color: white;
+}
+
 .container22 {
   margin: 0 auto;
   max-width: 930px;
@@ -27,7 +32,22 @@
   width: 100%;
   padding: 10px;
   height: 65px;
-  color:  #1a1a1a;
+}
+
+.container222 {
+  margin: 0 auto;
+  max-width: 930px;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  height: 65px;
 }
 
 .adtext {

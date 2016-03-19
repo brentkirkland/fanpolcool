@@ -86,8 +86,10 @@ export class MyGames extends React.Component {
     return (
       <div className={s.root4}>
         <div className={s.container22}>
-          <Link to='/games'><span className={s.adtextgamegame}>{'GAMES'}</span></Link>
-          <span className={s.adtextgame}>{' > PORTFOLIO'}</span>
+          <div>
+            <Link to='/games'><span className={s.adtextgamegame}>{'GAMES'}</span></Link>
+            <span className={s.adtextgame}>{' > PORTFOLIO'}</span>
+          </div>
           <span className={s.adtext}>{'| View your results (or mouse over --- to see remaining time)'}</span>
         </div>
       </div>
@@ -115,6 +117,7 @@ export class MyGames extends React.Component {
       <div className={s.root}>
         <Header fixed={false} home route={this.props.route}/>
         <div className={s.fakeunder}></div>
+        {this.renderTip()}
         {this.renderAd()}
         <div className={s.container}>
           <div className={s.games}>
@@ -130,6 +133,16 @@ export class MyGames extends React.Component {
           </div>
         </div>
         <Footer/>
+      </div>
+    )
+  }
+
+  renderTip () {
+    return (
+      <div className={s.root44}>
+        <div className={s.container222}>
+          <span className={s.adtext}><b>TIP:</b>{' Increase your earnings by entering multiple games.'}</span>
+        </div>
       </div>
     )
   }

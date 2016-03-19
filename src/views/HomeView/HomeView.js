@@ -16,7 +16,7 @@ export class HomeView extends React.Component {
   };
 
   renderMap () {
-    if (this.props.containerWidth > 930) {
+    if (this.props.containerWidth > 680) {
       return (
         <Map />
       )
